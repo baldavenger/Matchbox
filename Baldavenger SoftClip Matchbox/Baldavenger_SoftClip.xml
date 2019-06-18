@@ -1,0 +1,34 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="0" Description="" Name="SoftClip">
+<Shader OutputBitDepth="Output" Index="1">
+<Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="input" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_REPEAT" GL_TEXTURE_WRAP_S="GL_REPEAT" GL_TEXTURE_MAG_FILTER="GL_NEAREST" GL_TEXTURE_MIN_FILTER="GL_NEAREST" Type="sampler2D" Name="front">
+</Uniform>
+<Uniform Max="3" Min="0" Default="0" Inc="1" Tooltip="Working colorspace" Row="0" Col="0" Page="0" DisplayName="Source" Type="int" Name="p_Source" ValueType="Popup">
+<PopupEntry Title="Bypass" Value="0">
+</PopupEntry>
+<PopupEntry Title="Cineon" Value="1">
+</PopupEntry>
+<PopupEntry Title="LogC V3 WG" Value="2">
+</PopupEntry>
+</Uniform>
+<Uniform Row="0" Col="1" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Display Highlights" Name="p_SwitchA">
+</Uniform>
+<Uniform ResDependent="None" Max="0.0" Min="-8.0" Default="0.000000" Inc="0.001" Tooltip="Super Highlights Compression" Row="3" Col="1" Page="0" DisplayName="HL Compression" Type="float" Name="p_SoftClipA">
+</Uniform>
+<Uniform ResDependent="None" Max="10.0" Min="0.0" Default="1.000000" Inc="0.001" Tooltip="Redistribute Highlight Compression" Row="4" Col="1" Page="0" DisplayName="Redistribute" Type="float" Name="p_SoftClipB">
+</Uniform>
+<Uniform ResDependent="None" Max="1.0" Min="0.0" Default="1.000000" Inc="0.001" Tooltip="Highlight SoftClip Min" Row="1" Col="1" Page="0" DisplayName="Highlight Min" Type="float" Name="p_SoftClipC">
+</Uniform>
+<Uniform ResDependent="None" Max="5.0" Min="1.0" Default="1.000000" Inc="0.001" Tooltip="Highlight SoftClip Max" Row="2" Col="1" Page="0" DisplayName="Highlight Max" Type="float" Name="p_SoftClipD">
+</Uniform>
+<Uniform Row="0" Col="2" Page="0" Default="False" Tooltip="" Type="bool" DisplayName="Display Shadows" Name="p_SwitchB">
+</Uniform>
+<Uniform ResDependent="None" Max="1.0" Min="0.0" Default="0.000000" Inc="0.001" Tooltip="Shadow SoftClip Min" Row="1" Col="2" Page="0" DisplayName="Shadow Min" Type="float" Name="p_SoftClipE">
+</Uniform>
+<Uniform ResDependent="None" Max="0.0" Min="-1.0" Default="0.000000" Inc="0.001" Tooltip="Shadow SoftClip Max" Row="2" Col="2" Page="0" DisplayName="Shadow Max" Type="float" Name="p_SoftClipF">
+</Uniform>
+</Shader>
+<Page Name="SoftClip" Page="0">
+<Col Name="SoftClip" Col="0" Page="0">
+</Col>
+</Page>
+</ShaderNodePreset>
