@@ -171,7 +171,6 @@ uniform bool p_InvOT_Legal;
 #define RRTODT707		RRTODT_Rec709_100nits_10nits_sRGB(aces)
 #define RRTODT708		Custom_OutputTransform(aces, p_OT_Y_MIN, p_OT_Y_MID, p_OT_Y_MAX, p_OT_Display, p_OT_Limit, p_OT_EOTF, p_OT_SURR, p_OT_Stretch, p_OT_D60_SIM, p_OT_Legal)
 
-
 #define INVRRTODT800		Bypass
 #define INVRRTODT801		InvRRTODT_P3D65_108nits_7_2nits_ST2084(aces)
 #define INVRRTODT802		InvRRTODT_Rec2020_1000nits_15nits_HLG(aces)
@@ -238,105 +237,105 @@ float6 coefsLow; float6 coefsHigh;
 #define CINEMA_BLACK		pow(10.0, log10(0.02))
 
 mat3 MM = mat3( vec3(0.5, -1.0, 0.5), vec3(-1.0, 1.0, 0.5), vec3(0.5, 0.0, 0.0) );
-const float TINY = 1e-10;
-const float DIM_SURROUND_GAMMA = 0.9811;
-const float ODT_SAT_FACTOR = 0.93;
-const float MIN_STOP_SDR = -6.5;
-const float MAX_STOP_SDR = 6.5;
-const float MIN_STOP_RRT = -15.0;
-const float MAX_STOP_RRT = 18.0;
-const float MIN_LUM_SDR = 0.02;
-const float MAX_LUM_SDR = 48.0;
-const float MIN_LUM_RRT = 0.0001;
-const float MAX_LUM_RRT = 10000.0;
-const float RRT_GLOW_GAIN = 0.05;
-const float RRT_GLOW_MID = 0.08;
-const float RRT_RED_SCALE = 0.82;
-const float RRT_RED_PIVOT = 0.03;
-const float RRT_RED_HUE = 0.0;
-const float RRT_RED_WIDTH = 135.0;
-const float RRT_SAT_FACTOR = 0.96;
-const float X_BRK = 0.0078125;
-const float Y_BRK = 0.155251141552511;
-const float A = 10.5402377416545;
-const float B = 0.0729055341958355;
-const float sqrt3over4 = 0.433012701892219;
-const float pq_m1 = 0.1593017578125;
-const float pq_m2 = 78.84375;
-const float pq_c1 = 0.8359375;
-const float pq_c2 = 18.8515625;
-const float pq_c3 = 18.6875;
-const float pq_C = 10000.0;
+float TINY = 1e-10;
+float DIM_SURROUND_GAMMA = 0.9811;
+float ODT_SAT_FACTOR = 0.93;
+float MIN_STOP_SDR = -6.5;
+float MAX_STOP_SDR = 6.5;
+float MIN_STOP_RRT = -15.0;
+float MAX_STOP_RRT = 18.0;
+float MIN_LUM_SDR = 0.02;
+float MAX_LUM_SDR = 48.0;
+float MIN_LUM_RRT = 0.0001;
+float MAX_LUM_RRT = 10000.0;
+float RRT_GLOW_GAIN = 0.05;
+float RRT_GLOW_MID = 0.08;
+float RRT_RED_SCALE = 0.82;
+float RRT_RED_PIVOT = 0.03;
+float RRT_RED_HUE = 0.0;
+float RRT_RED_WIDTH = 135.0;
+float RRT_SAT_FACTOR = 0.96;
+float X_BRK = 0.0078125;
+float Y_BRK = 0.155251141552511;
+float A = 10.5402377416545;
+float B = 0.0729055341958355;
+float sqrt3over4 = 0.433012701892219;
+float pq_m1 = 0.1593017578125;
+float pq_m2 = 78.84375;
+float pq_c1 = 0.8359375;
+float pq_c2 = 18.8515625;
+float pq_c3 = 18.6875;
+float pq_C = 10000.0;
 
-const mat3 CDD_TO_CID = mat3(
+mat3 CDD_TO_CID = mat3(
 vec3(0.75573, 0.05901, 0.16134),
 vec3(0.22197, 0.96928, 0.07406), 
 vec3(0.02230, -0.02829, 0.76460)
 );
 
-const mat3 EXP_TO_ACES = mat3(
+mat3 EXP_TO_ACES = mat3(
 vec3(0.72286, 0.11923, 0.01427),
 vec3(0.12630, 0.76418, 0.08213),
 vec3(0.15084, 0.11659, 0.90359)
 );
 
-const Chromaticities AP0 = Chromaticities(
+Chromaticities AP0 = Chromaticities(
 vec2(0.7347, 0.2653),vec2(0.0, 1.0),
 vec2(0.0001, -0.077),vec2(0.32168, 0.33767)
 );
 
-const Chromaticities AP1 = Chromaticities(
+Chromaticities AP1 = Chromaticities(
 vec2(0.713, 0.293),vec2(0.165, 0.83),
 vec2(0.128, 0.044),vec2(0.32168, 0.33767)
 );
 
-const Chromaticities REC709_PRI = Chromaticities(
+Chromaticities REC709_PRI = Chromaticities(
 vec2(0.64, 0.33),vec2(0.3, 0.6),
 vec2(0.15, 0.06),vec2(0.3127, 0.329)
 );
 
-const Chromaticities P3D60_PRI = Chromaticities(
+Chromaticities P3D60_PRI = Chromaticities(
 vec2(0.68, 0.32),vec2(0.265, 0.69),
 vec2(0.15, 0.06),vec2(0.32168, 0.33767)
 );
-const Chromaticities P3D65_PRI = Chromaticities(
+Chromaticities P3D65_PRI = Chromaticities(
 vec2(0.68, 0.32),vec2(0.265, 0.69),
 vec2(0.15, 0.06),vec2(0.3127, 0.329)
 );
 
-const Chromaticities P3DCI_PRI = Chromaticities(
+Chromaticities P3DCI_PRI = Chromaticities(
 vec2(0.68, 0.32),vec2(0.265, 0.69),
 vec2(0.15, 0.06),vec2(0.314, 0.351)
 );
 
-const Chromaticities ARRI_ALEXA_WG_PRI = Chromaticities(
+Chromaticities ARRI_ALEXA_WG_PRI = Chromaticities(
 vec2(0.684, 0.313),vec2(0.221, 0.848),
 vec2(0.0861, -0.102),vec2(0.3127, 0.329)
 );
 
-const Chromaticities REC2020_PRI = Chromaticities(
+Chromaticities REC2020_PRI = Chromaticities(
 vec2(0.708, 0.292),vec2(0.17, 0.797),
 vec2(0.131, 0.046),vec2(0.3127, 0.329)
 );
 
-const Chromaticities RIMMROMM_PRI = Chromaticities(
+Chromaticities RIMMROMM_PRI = Chromaticities(
 vec2(0.7347, 0.2653),vec2(0.1596, 0.8404),
 vec2(0.0366, 0.0001),vec2(0.3457, 0.3585)
 );
 
-const mat3 CONE_RESP_MAT_BRADFORD = mat3(
+mat3 CONE_RESP_MAT_BRADFORD = mat3(
 vec3(0.8951, -0.7502, 0.0389),
 vec3(0.2664, 1.7135, -0.0685),
 vec3(-0.1614, 0.0367, 1.0296)
 );
 
-const mat3 CONE_RESP_MAT_CAT02 = mat3(
+mat3 CONE_RESP_MAT_CAT02 = mat3(
 vec3(0.7328, -0.7036, 0.003),
 vec3(0.4296, 1.6975, 0.0136),
 vec3(-0.1624, 0.0061, 0.9834)
 );
 
-const mat3 AP1_2_AP0_MAT_B = mat3(
+mat3 AP1_2_AP0_MAT_B = mat3(
 vec3(0.6954522414, 0.0447945634, -0.0055258826), 
 vec3(0.1406786965, 0.8596711185, 0.0040252103), 
 vec3(0.1638690622, 0.0955343182, 1.0015006723) );
@@ -511,10 +510,10 @@ return Out;
 
 float vLogToLinScene( float x)
 {
-const float cutInv = 0.181;
-const float b = 0.00873;
-const float c = 0.241514;
-const float d = 0.598206;
+float cutInv = 0.181;
+float b = 0.00873;
+float c = 0.241514;
+float d = 0.598206;
 if (x <= cutInv)
 return (x - 0.125) / 5.6;
 else
@@ -742,15 +741,15 @@ return V;
 
 float smpteRange_to_fullRange( float ya)
 {
-const float REFBLACK = ( 64.0 / 1023.0);
-const float REFWHITE = ( 940.0 / 1023.0);
+float REFBLACK = ( 64.0 / 1023.0);
+float REFWHITE = ( 940.0 / 1023.0);
 return (( ya - REFBLACK) / ( REFWHITE - REFBLACK));
 }
 
 float fullRange_to_smpteRange( float ya)
 {
-const float REFBLACK = ( 64.0 / 1023.0);
-const float REFWHITE = ( 940.0 / 1023.0);
+float REFBLACK = ( 64.0 / 1023.0);
+float REFWHITE = ( 940.0 / 1023.0);
 return ( ya * ( REFWHITE - REFBLACK) + REFBLACK );
 }
 
@@ -824,11 +823,11 @@ vec3 ST2084_2_HLG_1000nits_f3( vec3 PQ)
 {
 vec3 displayLinear = ST2084_2_Y_f3( PQ);
 float Y_d = 0.2627 * displayLinear.x + 0.6780 * displayLinear.y + 0.0593 * displayLinear.z;
-const float L_w = 1000.0;
-const float L_b = 0.0;
-const float alpha = (L_w - L_b);
-const float beta = L_b;
-const float gamma = 1.2;
+float L_w = 1000.0;
+float L_b = 0.0;
+float alpha = (L_w - L_b);
+float beta = L_b;
+float gamma = 1.2;
 vec3 sceneLinear;
 if (Y_d == 0.0) {
 sceneLinear.x = 0.0; sceneLinear.y = 0.0; sceneLinear.z = 0.0;
@@ -837,9 +836,9 @@ sceneLinear.x = pow( (Y_d - beta) / alpha, (1.0 - gamma) / gamma) * ((displayLin
 sceneLinear.y = pow( (Y_d - beta) / alpha, (1.0 - gamma) / gamma) * ((displayLinear.y - beta) / alpha);
 sceneLinear.z = pow( (Y_d - beta) / alpha, (1.0 - gamma) / gamma) * ((displayLinear.z - beta) / alpha);
 }
-const float a = 0.17883277;
-const float b = 0.28466892;
-const float c = 0.55991073;
+float a = 0.17883277;
+float b = 0.28466892;
+float c = 0.55991073;
 vec3 HLG;
 if (sceneLinear.x <= 1.0 / 12.0) {
 HLG.x = sqrt(3.0 * sceneLinear.x);
@@ -861,14 +860,14 @@ return HLG;
 
 vec3 HLG_2_ST2084_1000nits_f3( vec3 HLG)
 {
-const float a = 0.17883277;
-const float b = 0.28466892;
-const float c = 0.55991073;
-const float L_w = 1000.0;
-const float L_b = 0.0;
-const float alpha = (L_w - L_b);
-const float beta = L_b;
-const float gamma = 1.2;
+float a = 0.17883277;
+float b = 0.28466892;
+float c = 0.55991073;
+float L_w = 1000.0;
+float L_b = 0.0;
+float alpha = (L_w - L_b);
+float beta = L_b;
+float gamma = 1.2;
 vec3 sceneLinear;
 if ( HLG.x >= 0.0 && HLG.x <= 0.5) {
 sceneLinear.x = pow(HLG.x, 2.0) / 3.0;
@@ -3370,12 +3369,12 @@ return outputCV;
 
 vec3 ODT_Rec709_D60sim_100nits_dim( vec3 oces)
 {
-const Chromaticities DISPLAY_PRI = REC709_PRI;
+Chromaticities DISPLAY_PRI = REC709_PRI;
 mat3 XYZ_2_DISPLAY_PRI_MAT = XYZtoRGB( DISPLAY_PRI);
-const float DISPGAMMA = 2.4;
-const float L_W = 1.0;
-const float L_B = 0.0;
-const float SCALE = 0.955;
+float DISPGAMMA = 2.4;
+float L_W = 1.0;
+float L_B = 0.0;
+float SCALE = 0.955;
 bool legalRange = false;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
@@ -3473,12 +3472,12 @@ return outputCV;
 
 vec3 ODT_Rec2020_Rec709limited_100nits_dim( vec3 oces)
 {
-const Chromaticities DISPLAY_PRI = REC2020_PRI;
+Chromaticities DISPLAY_PRI = REC2020_PRI;
 mat3 XYZ_2_DISPLAY_PRI_MAT = XYZtoRGB(DISPLAY_PRI);
-const Chromaticities LIMITING_PRI = REC709_PRI;
-const float DISPGAMMA = 2.4;
-const float L_W = 1.0;
-const float L_B = 0.0;
+Chromaticities LIMITING_PRI = REC709_PRI;
+float DISPGAMMA = 2.4;
+float L_W = 1.0;
+float L_B = 0.0;
 bool legalRange = false;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
@@ -3514,12 +3513,12 @@ return outputCV;
 
 vec3 ODT_Rec2020_P3D65limited_100nits_dim( vec3 oces)
 {
-const Chromaticities DISPLAY_PRI = REC2020_PRI;
+Chromaticities DISPLAY_PRI = REC2020_PRI;
 mat3 XYZ_2_DISPLAY_PRI_MAT = XYZtoRGB(DISPLAY_PRI);
-const Chromaticities LIMITING_PRI = P3D65_PRI;
-const float DISPGAMMA = 2.4;
-const float L_W = 1.0;
-const float L_B = 0.0;
+Chromaticities LIMITING_PRI = P3D65_PRI;
+float DISPGAMMA = 2.4;
+float L_W = 1.0;
+float L_B = 0.0;
 bool legalRange = false;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
@@ -3555,11 +3554,11 @@ return outputCV;
 
 vec3 ODT_sRGB_D60sim_100nits_dim( vec3 oces)
 {
-const Chromaticities DISPLAY_PRI = REC709_PRI;
+Chromaticities DISPLAY_PRI = REC709_PRI;
 mat3 XYZ_2_DISPLAY_PRI_MAT = XYZtoRGB(DISPLAY_PRI);
-const float DISPGAMMA = 2.4;
-const float OFFSET = 0.055;
-const float SCALE = 0.955;
+float DISPGAMMA = 2.4;
+float OFFSET = 0.055;
+float SCALE = 0.955;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
 vec3 rgbPost;
@@ -3591,10 +3590,10 @@ return outputCV;
 }
 
 vec3 ODT_sRGB_100nits_dim( vec3 oces) {
-const Chromaticities DISPLAY_PRI = REC709_PRI;
+Chromaticities DISPLAY_PRI = REC709_PRI;
 mat3 XYZ_2_DISPLAY_PRI_MAT = XYZtoRGB(DISPLAY_PRI);
-const float DISPGAMMA = 2.4; 
-const float OFFSET = 0.055;
+float DISPGAMMA = 2.4; 
+float OFFSET = 0.055;
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
 vec3 rgbPost;
 rgbPost.x = segmented_spline_c9_fwd( rgbPre.x, ODT_48nits());
@@ -3617,12 +3616,12 @@ return outputCV;
 
 vec3 ODT_P3DCI_48nits( vec3 oces)
 {
-const Chromaticities DISPLAY_PRI = P3DCI_PRI;
+Chromaticities DISPLAY_PRI = P3DCI_PRI;
 mat3 XYZ_2_DISPLAY_PRI_MAT = XYZtoRGB( DISPLAY_PRI);
-const float DISPGAMMA = 2.6;
-const float NEW_WHT = 0.918;
-const float ROLL_WIDTH = 0.5;
-const float SCALE = 0.96;
+float DISPGAMMA = 2.6;
+float NEW_WHT = 0.918;
+float ROLL_WIDTH = 0.5;
+float SCALE = 0.96;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
 vec3 rgbPost;
@@ -3653,12 +3652,12 @@ return outputCV;
 
 vec3 ODT_P3DCI_D60sim_48nits( vec3 oces)
 {
-const Chromaticities DISPLAY_PRI = P3DCI_PRI;
+Chromaticities DISPLAY_PRI = P3DCI_PRI;
 mat3 XYZ_2_DISPLAY_PRI_MAT = XYZtoRGB( DISPLAY_PRI);
-const float DISPGAMMA = 2.6;
-const float NEW_WHT = 0.918;
-const float ROLL_WIDTH = 0.5;
-const float SCALE = 0.96;
+float DISPGAMMA = 2.6;
+float NEW_WHT = 0.918;
+float ROLL_WIDTH = 0.5;
+float SCALE = 0.96;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
 vec3 rgbPost;
@@ -3690,12 +3689,12 @@ return outputCV;
 
 vec3 ODT_P3DCI_D65sim_48nits( vec3 oces)
 {
-const Chromaticities DISPLAY_PRI = P3DCI_PRI;
+Chromaticities DISPLAY_PRI = P3DCI_PRI;
 mat3 XYZ_2_DISPLAY_PRI_MAT = XYZtoRGB( DISPLAY_PRI);
-const float DISPGAMMA = 2.6;
-const float NEW_WHT = 0.908;
-const float ROLL_WIDTH = 0.5;
-const float SCALE = 0.9575;
+float DISPGAMMA = 2.6;
+float NEW_WHT = 0.908;
+float ROLL_WIDTH = 0.5;
+float SCALE = 0.9575;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
 vec3 rgbPost;
@@ -3727,9 +3726,9 @@ return outputCV;
 
 vec3 ODT_P3D60_48nits( vec3 oces)
 {
-const Chromaticities DISPLAY_PRI = P3D60_PRI;
+Chromaticities DISPLAY_PRI = P3D60_PRI;
 mat3 XYZ_2_DISPLAY_PRI_MAT = XYZtoRGB( DISPLAY_PRI);
-const float DISPGAMMA = 2.6;
+float DISPGAMMA = 2.6;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
 vec3 rgbPost;
@@ -3752,9 +3751,9 @@ return outputCV;
 
 vec3 ODT_P3D65_48nits( vec3 oces)
 {
-const Chromaticities DISPLAY_PRI = P3D65_PRI;
+Chromaticities DISPLAY_PRI = P3D65_PRI;
 mat3 XYZ_2_DISPLAY_PRI_MAT = XYZtoRGB( DISPLAY_PRI);
-const float DISPGAMMA = 2.6;
+float DISPGAMMA = 2.6;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
 vec3 rgbPost;
@@ -3777,10 +3776,10 @@ return outputCV;
 
 vec3 ODT_P3D65_D60sim_48nits( vec3 oces)
 {
-const Chromaticities DISPLAY_PRI = P3D65_PRI;
+Chromaticities DISPLAY_PRI = P3D65_PRI;
 mat3 XYZ_2_DISPLAY_PRI_MAT = XYZtoRGB(DISPLAY_PRI);
-const float DISPGAMMA = 2.6;
-const float SCALE = 0.964;
+float DISPGAMMA = 2.6;
+float SCALE = 0.964;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
 vec3 rgbPost;
@@ -3807,10 +3806,10 @@ return outputCV;
 
 vec3 ODT_P3D65_Rec709limited_48nits( vec3 oces)
 {
-const Chromaticities DISPLAY_PRI = P3D65_PRI;
+Chromaticities DISPLAY_PRI = P3D65_PRI;
 mat3 XYZ_2_DISPLAY_PRI_MAT = XYZtoRGB(DISPLAY_PRI);
-const Chromaticities LIMITING_PRI = REC709_PRI;
-const float DISPGAMMA = 2.6;
+Chromaticities LIMITING_PRI = REC709_PRI;
+float DISPGAMMA = 2.6;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
 vec3 rgbPost;
@@ -3857,7 +3856,7 @@ return outputCV;
 
 vec3 ODT_DCDM_P3D60limited( vec3 oces)
 {
-const Chromaticities LIMITING_PRI = P3D60_PRI;
+Chromaticities LIMITING_PRI = P3D60_PRI;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
 vec3 rgbPost;
@@ -3879,7 +3878,7 @@ return outputCV;
 
 vec3 ODT_DCDM_P3D65limited( vec3 oces)
 {
-const Chromaticities LIMITING_PRI = P3D65_PRI;
+Chromaticities LIMITING_PRI = P3D65_PRI;
 
 vec3 rgbPre = AP0_2_AP1_MAT * oces;
 vec3 rgbPost;
@@ -4011,12 +4010,12 @@ return oces;
 
 vec3 InvODT_Rec709_D60sim_100nits_dim( vec3 outputCV)
 {
-const Chromaticities DISPLAY_PRI = REC709_PRI;
+Chromaticities DISPLAY_PRI = REC709_PRI;
 mat3 DISPLAY_PRI_2_XYZ_MAT = RGBtoXYZ(DISPLAY_PRI);
-const float DISPGAMMA = 2.4;
-const float L_W = 1.0;
-const float L_B = 0.0;
-const float SCALE = 0.955;
+float DISPGAMMA = 2.4;
+float L_W = 1.0;
+float L_B = 0.0;
+float SCALE = 0.955;
 bool legalRange = false;
 
 if (legalRange) {
@@ -4114,11 +4113,11 @@ return oces;
 
 vec3 InvODT_sRGB_D60sim_100nits_dim( vec3 outputCV)
 {
-const Chromaticities DISPLAY_PRI = REC709_PRI;
+Chromaticities DISPLAY_PRI = REC709_PRI;
 mat3 DISPLAY_PRI_2_XYZ_MAT = RGBtoXYZ(DISPLAY_PRI);
-const float DISPGAMMA = 2.4;
-const float OFFSET = 0.055;
-const float SCALE = 0.955;
+float DISPGAMMA = 2.4;
+float OFFSET = 0.055;
+float SCALE = 0.955;
 
 vec3 linearCV;
 linearCV.x = moncurve_f( outputCV.x, DISPGAMMA, OFFSET);
@@ -4150,10 +4149,10 @@ return oces;
 
 vec3 InvODT_sRGB_100nits_dim( vec3 outputCV)
 {
-const Chromaticities DISPLAY_PRI = REC709_PRI;
+Chromaticities DISPLAY_PRI = REC709_PRI;
 mat3 DISPLAY_PRI_2_XYZ_MAT = RGBtoXYZ(DISPLAY_PRI);
-const float DISPGAMMA = 2.4;
-const float OFFSET = 0.055;
+float DISPGAMMA = 2.4;
+float OFFSET = 0.055;
 
 vec3 linearCV;
 linearCV.x = moncurve_f( outputCV.x, DISPGAMMA, OFFSET);
@@ -4183,12 +4182,12 @@ return oces;
 
 vec3 InvODT_P3DCI_48nits( vec3 outputCV)
 {
-const Chromaticities DISPLAY_PRI = P3DCI_PRI;
+Chromaticities DISPLAY_PRI = P3DCI_PRI;
 mat3 DISPLAY_PRI_2_XYZ_MAT = RGBtoXYZ(DISPLAY_PRI);
-const float DISPGAMMA = 2.6;
-const float NEW_WHT = 0.918;
-const float ROLL_WIDTH = 0.5;
-const float SCALE = 0.96;
+float DISPGAMMA = 2.6;
+float NEW_WHT = 0.918;
+float ROLL_WIDTH = 0.5;
+float SCALE = 0.96;
 
 vec3 linearCV = pow_f3( outputCV, DISPGAMMA);
 vec3 XYZ = DISPLAY_PRI_2_XYZ_MAT * linearCV;
@@ -4215,12 +4214,12 @@ return oces;
 
 vec3 InvODT_P3DCI_D60sim_48nits( vec3 outputCV)
 {
-const Chromaticities DISPLAY_PRI = P3DCI_PRI;
+Chromaticities DISPLAY_PRI = P3DCI_PRI;
 mat3 DISPLAY_PRI_2_XYZ_MAT = RGBtoXYZ(DISPLAY_PRI);
-const float DISPGAMMA = 2.6;
-const float NEW_WHT = 0.918;
-const float ROLL_WIDTH = 0.5;
-const float SCALE = 0.96;
+float DISPGAMMA = 2.6;
+float NEW_WHT = 0.918;
+float ROLL_WIDTH = 0.5;
+float SCALE = 0.96;
 
 vec3 linearCV = pow_f3( outputCV, DISPGAMMA);
 vec3 XYZ = DISPLAY_PRI_2_XYZ_MAT * linearCV;
@@ -4247,12 +4246,12 @@ return oces;
 
 vec3 InvODT_P3DCI_D65sim_48nits( vec3 outputCV)
 {
-const Chromaticities DISPLAY_PRI = P3DCI_PRI;
+Chromaticities DISPLAY_PRI = P3DCI_PRI;
 mat3 DISPLAY_PRI_2_XYZ_MAT = RGBtoXYZ(DISPLAY_PRI);
-const float DISPGAMMA = 2.6;
-const float NEW_WHT = 0.908;
-const float ROLL_WIDTH = 0.5;
-const float SCALE = 0.9575;
+float DISPGAMMA = 2.6;
+float NEW_WHT = 0.908;
+float ROLL_WIDTH = 0.5;
+float SCALE = 0.9575;
 
 vec3 linearCV = pow_f3( outputCV, DISPGAMMA);
 vec3 XYZ = DISPLAY_PRI_2_XYZ_MAT * linearCV;
@@ -4279,9 +4278,9 @@ return oces;
 
 vec3 InvODT_P3D60_48nits( vec3 outputCV)
 {
-const Chromaticities DISPLAY_PRI = P3D60_PRI;
+Chromaticities DISPLAY_PRI = P3D60_PRI;
 mat3 DISPLAY_PRI_2_XYZ_MAT = RGBtoXYZ( DISPLAY_PRI);
-const float DISPGAMMA = 2.6;
+float DISPGAMMA = 2.6;
 
 vec3 linearCV = pow_f3( outputCV, DISPGAMMA);
 vec3 XYZ = DISPLAY_PRI_2_XYZ_MAT * linearCV;
@@ -4304,9 +4303,9 @@ return oces;
 
 vec3 InvODT_P3D65_48nits( vec3 outputCV)
 {
-const Chromaticities DISPLAY_PRI = P3D65_PRI;
+Chromaticities DISPLAY_PRI = P3D65_PRI;
 mat3 DISPLAY_PRI_2_XYZ_MAT = RGBtoXYZ( DISPLAY_PRI);
-const float DISPGAMMA = 2.6;
+float DISPGAMMA = 2.6;
 
 vec3 linearCV = pow_f3( outputCV, DISPGAMMA);
 vec3 XYZ = DISPLAY_PRI_2_XYZ_MAT * linearCV;
@@ -4329,10 +4328,10 @@ return oces;
 
 vec3 InvODT_P3D65_D60sim_48nits( vec3 outputCV)
 {
-const Chromaticities DISPLAY_PRI = P3D65_PRI;
+Chromaticities DISPLAY_PRI = P3D65_PRI;
 mat3 DISPLAY_PRI_2_XYZ_MAT = RGBtoXYZ( DISPLAY_PRI);
-const float DISPGAMMA = 2.6;
-const float SCALE = 0.964;
+float DISPGAMMA = 2.6;
+float SCALE = 0.964;
 
 vec3 linearCV = pow_f3( outputCV, DISPGAMMA);
 

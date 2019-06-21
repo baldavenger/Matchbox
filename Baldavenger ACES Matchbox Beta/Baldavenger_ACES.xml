@@ -326,132 +326,132 @@
       </Uniform>
     <Uniform Name="p_LMTScale24" Type="float" DisplayName="HvS Sat2" Page="1" Col="4" Row="4" Tooltip="" Inc="0.01" Default="1.0" Min="0.0" Max="3.0" ResDependent="None">
       </Uniform>
-    <Uniform Name="p_OT_Y_MIN" Type="float" DisplayName="Y_Min" Page="2" Col="1" Row="0" Tooltip="" Inc="1.0" Default="1.0" Min="1.0" Max="1000.0" ResDependent="None">
+    <Uniform Name="p_OT_Y_MIN" Type="float" DisplayName="Y_Min" Page="2" Col="1" Row="0" Tooltip="" Inc="0.00001" Default="0.0001" Min="0.00001" Max="0.1" ResDependent="None">
       </Uniform>
     <Uniform Name="p_OT_Y_MID" Type="float" DisplayName="Y_Mid" Page="2" Col="1" Row="1" Tooltip="" Inc="0.1" Default="15.0" Min="0.0" Max="100.0" ResDependent="None">
       </Uniform>
     <Uniform Name="p_OT_Y_MAX" Type="float" DisplayName="Y_Max" Page="2" Col="1" Row="2" Tooltip="" Inc="1.0" Default="1000.0" Min="48.0" Max="10000.0" ResDependent="None">
       </Uniform>
-    <Uniform Name="p_InvOT_Y_MIN" Type="float" DisplayName="Y_Min" Page="2" Col="3" Row="0" Tooltip="" Inc="1.0" Default="1.0" Min="1.0" Max="1000.0" ResDependent="None">
+    <Uniform Name="p_InvOT_Y_MIN" Type="float" DisplayName="Y_Min" Page="2" Col="3" Row="0" Tooltip="" Inc="0.00001" Default="0.0001" Min="0.00001" Max="0.1" ResDependent="None">
       </Uniform>
     <Uniform Name="p_InvOT_Y_MID" Type="float" DisplayName="Y_Mid" Page="2" Col="3" Row="1" Tooltip="" Inc="0.1" Default="15.0" Min="0.0" Max="100.0" ResDependent="None">
       </Uniform>
     <Uniform Name="p_InvOT_Y_MAX" Type="float" DisplayName="Y_Max" Page="2" Col="3" Row="2" Tooltip="" Inc="1.0" Default="1000.0" Min="48.0" Max="10000.0" ResDependent="None">
       </Uniform>
-    <Uniform Default="20" ValueType="Popup"
+    <Uniform Default="0" ValueType="Popup"
 	     Tooltip="Chromaticities"
 	     Row="0" Col="0" Page="2" Type="int"
 	     DisplayName="Chromaticities" Name="p_OT_Display">
-         <PopupEntry Title="Rec2020" Value="20">
+         <PopupEntry Title="Rec2020" Value="0">
          </PopupEntry>
-	 	 <PopupEntry Title="P3D60" Value="21">
+	 	 <PopupEntry Title="P3D60" Value="1">
          </PopupEntry>
-         <PopupEntry Title="P3D65" Value="22">
+         <PopupEntry Title="P3D65" Value="2">
          </PopupEntry>
-	 	 <PopupEntry Title="P3DCI" Value="23">
+	 	 <PopupEntry Title="P3DCI" Value="3">
          </PopupEntry>
-         <PopupEntry Title="Rec709" Value="24">
+         <PopupEntry Title="Rec709" Value="4">
          </PopupEntry>
 	</Uniform>
-	<Uniform Default="30" ValueType="Popup"
+	<Uniform Default="0" ValueType="Popup"
 	     Tooltip="Limit Promaries"
 	     Row="1" Col="0" Page="2" Type="int"
 	     DisplayName="Limit" Name="p_OT_Limit">
-         <PopupEntry Title="Rec2020" Value="30">
+         <PopupEntry Title="Rec2020" Value="0">
          </PopupEntry>
-	 	 <PopupEntry Title="P3D60" Value="31">
+	 	 <PopupEntry Title="P3D60" Value="1">
          </PopupEntry>
-         <PopupEntry Title="P3D65" Value="32">
+         <PopupEntry Title="P3D65" Value="2">
          </PopupEntry>
-	 	 <PopupEntry Title="P3DCI" Value="33">
+	 	 <PopupEntry Title="P3DCI" Value="3">
          </PopupEntry>
-         <PopupEntry Title="Rec709" Value="34">
+         <PopupEntry Title="Rec709" Value="4">
          </PopupEntry>
 	</Uniform>
-	<Uniform Default="40" ValueType="Popup"
+	<Uniform Default="0" ValueType="Popup"
 	     Tooltip="EOTF"
 	     Row="2" Col="0" Page="2" Type="int"
 	     DisplayName="EOTF" Name="p_OT_EOTF">
-         <PopupEntry Title="ST2084" Value="40">
+         <PopupEntry Title="ST2084" Value="0">
          </PopupEntry>
-	 	 <PopupEntry Title="BT1886" Value="41">
+	 	 <PopupEntry Title="BT1886" Value="1">
          </PopupEntry>
-         <PopupEntry Title="sRGB" Value="42">
+         <PopupEntry Title="sRGB" Value="2">
          </PopupEntry>
-	 	 <PopupEntry Title="Gamma 2.6" Value="43">
+	 	 <PopupEntry Title="Gamma 2.6" Value="3">
          </PopupEntry>
-         <PopupEntry Title="Limear" Value="44">
+         <PopupEntry Title="Limear" Value="4">
          </PopupEntry>
-         <PopupEntry Title="HLG" Value="45">
+         <PopupEntry Title="HLG" Value="5">
          </PopupEntry>
 	</Uniform>
-	<Uniform Default="51" ValueType="Popup"
+	<Uniform Default="1" ValueType="Popup"
 	     Tooltip="Surround"
 	     Row="3" Col="0" Page="2" Type="int"
 	     DisplayName="Surround" Name="p_OT_SURR">
-         <PopupEntry Title="Dark" Value="50">
+         <PopupEntry Title="Dark" Value="0">
          </PopupEntry>
-	 	 <PopupEntry Title="Dim" Value="51">
+	 	 <PopupEntry Title="Dim" Value="1">
          </PopupEntry>
-         <PopupEntry Title="Normal" Value="52">
+         <PopupEntry Title="Normal" Value="2">
          </PopupEntry>
 	</Uniform>
-	<Uniform Default="60" ValueType="Popup"
+	<Uniform Default="0" ValueType="Popup"
 	     Tooltip="Chromaticities"
 	     Row="0" Col="2" Page="2" Type="int"
 	     DisplayName="Chromaticities" Name="p_InvOT_Display">
-         <PopupEntry Title="Rec2020" Value="60">
+         <PopupEntry Title="Rec2020" Value="0">
          </PopupEntry>
-	 	 <PopupEntry Title="P3D60" Value="61">
+	 	 <PopupEntry Title="P3D60" Value="1">
          </PopupEntry>
-         <PopupEntry Title="P3D65" Value="62">
+         <PopupEntry Title="P3D65" Value="2">
          </PopupEntry>
-	 	 <PopupEntry Title="P3DCI" Value="63">
+	 	 <PopupEntry Title="P3DCI" Value="3">
          </PopupEntry>
-         <PopupEntry Title="Rec709" Value="64">
+         <PopupEntry Title="Rec709" Value="4">
          </PopupEntry>
 	</Uniform>
-	<Uniform Default="70" ValueType="Popup"
+	<Uniform Default="0" ValueType="Popup"
 	     Tooltip="Limit Promaries"
 	     Row="1" Col="2" Page="2" Type="int"
 	     DisplayName="Limit" Name="p_InvOT_Limit">
-         <PopupEntry Title="Rec2020" Value="70">
+         <PopupEntry Title="Rec2020" Value="0">
          </PopupEntry>
-	 	 <PopupEntry Title="P3D60" Value="71">
+	 	 <PopupEntry Title="P3D60" Value="1">
          </PopupEntry>
-         <PopupEntry Title="P3D65" Value="72">
+         <PopupEntry Title="P3D65" Value="2">
          </PopupEntry>
-	 	 <PopupEntry Title="P3DCI" Value="73">
+	 	 <PopupEntry Title="P3DCI" Value="3">
          </PopupEntry>
-         <PopupEntry Title="Rec709" Value="74">
+         <PopupEntry Title="Rec709" Value="4">
          </PopupEntry>
 	</Uniform>
-	<Uniform Default="80" ValueType="Popup"
+	<Uniform Default="0" ValueType="Popup"
 	     Tooltip="EOTF"
 	     Row="2" Col="2" Page="2" Type="int"
 	     DisplayName="EOTF" Name="p_InvOT_EOTF">
-         <PopupEntry Title="ST2084" Value="80">
+         <PopupEntry Title="ST2084" Value="0">
          </PopupEntry>
-	 	 <PopupEntry Title="BT1886" Value="81">
+	 	 <PopupEntry Title="BT1886" Value="1">
          </PopupEntry>
-         <PopupEntry Title="sRGB" Value="82">
+         <PopupEntry Title="sRGB" Value="2">
          </PopupEntry>
-	 	 <PopupEntry Title="Gamma 2.6" Value="83">
+	 	 <PopupEntry Title="Gamma 2.6" Value="3">
          </PopupEntry>
-         <PopupEntry Title="Limear" Value="84">
+         <PopupEntry Title="Limear" Value="4">
          </PopupEntry>
-         <PopupEntry Title="HLG" Value="85">
+         <PopupEntry Title="HLG" Value="5">
          </PopupEntry>
 	</Uniform>
-	<Uniform Default="91" ValueType="Popup"
+	<Uniform Default="1" ValueType="Popup"
 	     Tooltip="Surround"
 	     Row="3" Col="2" Page="2" Type="int"
 	     DisplayName="Surround" Name="p_InvOT_SURR">
-         <PopupEntry Title="Dark" Value="90">
+         <PopupEntry Title="Dark" Value="0">
          </PopupEntry>
-	 	 <PopupEntry Title="Dim" Value="91">
+	 	 <PopupEntry Title="Dim" Value="1">
          </PopupEntry>
-         <PopupEntry Title="Normal" Value="92">
+         <PopupEntry Title="Normal" Value="2">
          </PopupEntry>
 	</Uniform>
 		<Uniform Row="4" Col="0" Page="2" Default="False" Tooltip="" Type="bool" DisplayName="D60 Sim" Name="p_OT_D60_SIM">
