@@ -412,17 +412,6 @@ else y = 0.0;
 return y;
 }
 
-vec3 mult_f3_f33( vec3 X, mat3 A)
-{
-float r[3];
-float x[3] = float[3](X.x, X.y, X.z);
-for( int i = 0; i < 3; ++i){
-r[i] = 0.0f;
-for( int j = 0; j < 3; ++j){
-r[i] = r[i] + x[j] * A[j][i];}}
-return vec3(r[0], r[1], r[2]);
-}
-
 mat3 invert_f33( mat3 A) {
 mat3 R;
 mat3 result;
@@ -474,7 +463,7 @@ if( tableIN[i] <= p && p < tableIN[i+1] )
 float s = (p - tableIN[i]) / (tableIN[i+1] - tableIN[i]);
 return tableOUT[i] * ( 1.0 - s ) + tableOUT[i+1] * s;
 }}
-return 0.0f;
+return 0.0;
 }
 
 mat3 RGBtoXYZ( Chromaticities N) {
@@ -4782,7 +4771,7 @@ aces = get_IDT(p_IDT, aces);
 aces = get_InvODT(p_INVODT, aces);
 if(p_INVRRT == 601) aces = INVRRT601;
 aces = get_InvRRTODT(p_INVRRTODT, aces);
-if(p_Exposure != 0.0f) aces *= exp2(p_Exposure);
+if(p_Exposure != 0.0) aces *= exp2(p_Exposure);
 aces = get_LMT(p_LMT, aces);
 if(p_RRT == 301) aces = RRT301;
 aces = get_ODT(p_ODT, aces);
