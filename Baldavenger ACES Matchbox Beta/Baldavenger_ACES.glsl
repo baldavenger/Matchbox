@@ -415,17 +415,6 @@ else y = 0.0;
 return y;
 }
 
-vec3 mult_f3_f33( vec3 X, mat3 A)
-{
-float r[3];
-float x[3] = float[3](X.x, X.y, X.z);
-for( int i = 0; i < 3; ++i){
-r[i] = 0.0f;
-for( int j = 0; j < 3; ++j){
-r[i] = r[i] + x[j] * A[j][i];}}
-return vec3(r[0], r[1], r[2]);
-}
-
 mat3 invert_f33( mat3 A) {
 mat3 R;
 mat3 result;
@@ -477,7 +466,7 @@ if( tableIN[i] <= p && p < tableIN[i+1] )
 float s = (p - tableIN[i]) / (tableIN[i+1] - tableIN[i]);
 return tableOUT[i] * ( 1.0 - s ) + tableOUT[i+1] * s;
 }}
-return 0.0f;
+return 0.0;
 }
 
 mat3 RGBtoXYZ( Chromaticities N) {
@@ -1022,7 +1011,7 @@ float a = tmp.x;
 float b = tmp.y;
 float c = tmp.z;
 c = c - logy;
-float d = sqrt( b * b - 4. * a * c);
+float d = sqrt( b * b - 4.0 * a * c);
 float t = ( 2.0 * c) / ( -d - b);
 logx = log10(C.minPoint.x) + ( t + float(j)) * KNOT_INC_LOW;
 } else if ( (logy > log10(C.midPoint.y)) && (logy < log10(C.maxPoint.y)) ) {
@@ -1040,8 +1029,8 @@ float a = tmp.x;
 float b = tmp.y;
 float c = tmp.z;
 c = c - logy;
-float d = sqrt( b * b - 4. * a * c);
-float t = ( 2. * c) / ( -d - b);
+float d = sqrt( b * b - 4.0 * a * c);
+float t = ( 2.0 * c) / ( -d - b);
 logx = log10(C.midPoint.x) + ( t + float(j)) * KNOT_INC_HIGH;
 } else {
 logx = log10(C.maxPoint.x);
@@ -1141,7 +1130,7 @@ float a = tmp.x;
 float b = tmp.y;
 float c = tmp.z;
 c = c - logy;
-float d = sqrt( b * b - 4. * a * c);
+float d = sqrt( b * b - 4.0 * a * c);
 float t = ( 2.0 * c) / ( -d - b);
 logx = log10(C.minPoint.x) + ( t + float(j)) * KNOT_INC_LOW;
 } else if ( (logy > log10(C.midPoint.y)) && (logy < log10(C.maxPoint.y)) ) {
@@ -1167,7 +1156,7 @@ float a = tmp.x;
 float b = tmp.y;
 float c = tmp.z;
 c = c - logy;
-float d = sqrt( b * b - 4. * a * c);
+float d = sqrt( b * b - 4.0 * a * c);
 float t = ( 2.0 * c) / ( -d - b);
 logx = log10(C.midPoint.x) + ( t + float(j)) * KNOT_INC_HIGH;
 } else {
@@ -4775,7 +4764,6 @@ invrrtodt == 806 ? INVRRTODT806 : invrrtodt == 807 ? INVRRTODT807 : INVRRTODT808
 return aces;
 }
 
-
 void main()
 {
 vec2 uv = gl_FragCoord.xy / vec2( adsk_result_w, adsk_result_h );
@@ -4787,7 +4775,7 @@ aces = get_InvODT(p_INVODT, aces);
 if(p_INVRRT == 601) aces = INVRRT601;
 aces = get_InvRRTODT(p_INVRRTODT, aces);
 
-if(p_Exposure != 0.0f) aces *= exp2(p_Exposure);
+if(p_Exposure != 0.0) aces *= exp2(p_Exposure);
 
 aces = get_LMT(p_LMT, aces);
 
