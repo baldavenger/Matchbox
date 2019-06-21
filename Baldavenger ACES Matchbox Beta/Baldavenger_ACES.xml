@@ -1,0 +1,484 @@
+<ShaderNodePreset SupportsAdaptiveDegradation="False" SupportsAction="False" SupportsTransition="False" SupportsTimeline="False" MatteProvider="False" TimelineUseBack="True" ShaderType="Matchbox" SoftwareVersion="2016.0.0" Name="Baldavenger ACES" LimitInputsToTexture="True">
+  <Shader OutputBitDepth="Output" Index="1">
+    <Uniform Index="0" NoInput="Error" Mipmaps="False"
+	     GL_TEXTURE_WRAP_T="GL_REPEAT"
+	     GL_TEXTURE_WRAP_S="GL_REPEAT"
+	     GL_TEXTURE_MAG_FILTER="GL_LINEAR"
+	     GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D"
+	     Tooltip="" DisplayName="Front" Name="front"
+	     InputType="Front">
+    </Uniform>
+    <Uniform Name="p_Exposure" Type="float" DisplayName="Exposure" Page="0" Col="2" Row="0" Tooltip="" Inc="0.01" Default="0" Min="-10.0" Max="10.0" ResDependent="None">
+      </Uniform>
+    <Uniform Default="100" ValueType="Popup"
+	     Tooltip="IDT"
+	     Row="0" Col="0" Page="0" Type="int"
+	     DisplayName="IDT" Name="p_IDT">
+         <PopupEntry Title="Bypass" Value="100">
+         </PopupEntry>
+         <PopupEntry Title="ACEScc_to_ACES" Value="101">
+         </PopupEntry>
+	 	 <PopupEntry Title="ACEScct_to_ACES" Value="102">
+         </PopupEntry>
+         <PopupEntry Title="ACEScg_to_ACES" Value="103">
+         </PopupEntry>
+	 	 <PopupEntry Title="ADX10_to_ACES" Value="104">
+         </PopupEntry>
+         <PopupEntry Title="Rec709" Value="105">
+         </PopupEntry>
+         <PopupEntry Title="sRGB" Value="106">
+         </PopupEntry>
+         <PopupEntry Title="Alexa_v3_logC_EI800" Value="107">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Alexa_v3_raw_EI800_CCT6500" Value="108">
+         </PopupEntry>
+	 	 <PopupEntry Title="Panasonic_V35" Value="109">
+         </PopupEntry>
+         <PopupEntry Title="IDT_REDWideGamutRGB_Log3G10" Value="110">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C100_A_D55" Value="111">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C100_A_Tng" Value="112">
+         </PopupEntry>
+	 	 <PopupEntry Title="IDT_Canon_C100mk2_A_D55" Value="113">
+         </PopupEntry>
+	 	 <PopupEntry Title="IDT_Canon_C100mk2_A_Tng" Value="114">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300_A_D55" Value="115">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300_A_Tng" Value="116">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C500_A_D55" Value="117">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C500_A_Tng" Value="118">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C500_B_D55" Value="119">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C500_B_Tng" Value="120">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C500_CinemaGamut_A_D55" Value="121">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C500_CinemaGamut_A_Tng" Value="122">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C500_DCI_P3_A_D55" Value="123">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C500_DCI_P3_A_Tng" Value="124">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300mk2_CanonLog_BT2020_D_D55" Value="125">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300mk2_CanonLog_BT2020_D_Tng" Value="126">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300mk2_CanonLog_CinemaGamut_C_D55" Value="127">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300mk2_CanonLog_CinemaGamut_C_Tng" Value="128">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300mk2_CanonLog2_BT2020_B_D55" Value="129">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300mk2_CanonLog2_BT2020_B_Tng" Value="130">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300mk2_CanonLog2_CinemaGamut_A_D55" Value="131">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300mk2_CanonLog2_CinemaGamut_A_Tng" Value="132">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300mk2_CanonLog3_BT2020_F_D55" Value="133">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300mk2_CanonLog3_BT2020_F_Tng" Value="134">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300mk2_CanonLog3_CinemaGamut_E_D55" Value="135">
+         </PopupEntry>
+         <PopupEntry Title="IDT_Canon_C300mk2_CanonLog3_CinemaGamut_E_Tng" Value="136">
+         </PopupEntry>
+         <PopupEntry Title="Sony_SLog1_SGamut_10" Value="137">
+         </PopupEntry>
+         <PopupEntry Title="Sony_SLog1_SGamut_12" Value="138">
+         </PopupEntry>
+         <PopupEntry Title="Sony_SLog2_SGamut_Daylight_10" Value="140">
+         </PopupEntry>
+         <PopupEntry Title="Sony_SLog2_SGamut_Daylight_12" Value="141">
+         </PopupEntry>
+	 	 <PopupEntry Title="Sony_SLog2_SGamut_Tungsten_10" Value="142">
+         </PopupEntry>
+         <PopupEntry Title="Sony_SLog2_SGamut_Tungsten_12" Value="143">
+         </PopupEntry>
+	 	 <PopupEntry Title="Sony_SLog3_SGamut3" Value="144">
+         </PopupEntry>
+         <PopupEntry Title="Sony_SLog3_SGamut3Cine" Value="13">
+         </PopupEntry>
+    </Uniform>
+    <Uniform Default="200" ValueType="Popup"
+	     Tooltip="LMT"
+	     Row="1" Col="0" Page="0" Type="int"
+	     DisplayName="LMT" Name="p_LMT">
+         <PopupEntry Title="Bypass" Value="200">
+         </PopupEntry>
+         <PopupEntry Title="Print Film Emulation" Value="201">
+         </PopupEntry>
+	 	 <PopupEntry Title="Bleach Bypass" Value="202">
+         </PopupEntry>
+	 	 <PopupEntry Title="BlueLight Artifact Fix" Value="203">
+         </PopupEntry>
+         <PopupEntry Title="Custom LMT" Value="204">
+         </PopupEntry>
+    </Uniform>
+    <Uniform Default="300" ValueType="Popup"
+	     Tooltip="RRT"
+	     Row="2" Col="0" Page="0" Type="int"
+	     DisplayName="RRT" Name="p_RRT">
+         <PopupEntry Title="Bypass" Value="300">
+         </PopupEntry>
+         <PopupEntry Title="Enable RRT" Value="301">
+         </PopupEntry>
+    </Uniform>
+    <Uniform Default="400" ValueType="Popup"
+	     Tooltip="ODT"
+	     Row="3" Col="0" Page="0" Type="int"
+	     DisplayName="ODT" Name="p_ODT">
+         <PopupEntry Title="Bypass" Value="400">
+         </PopupEntry>
+         <PopupEntry Title="ACES_to_ACEScc" Value="401">
+         </PopupEntry>
+	 	 <PopupEntry Title="ACES_to_ACEScct" Value="402">
+         </PopupEntry>
+         <PopupEntry Title="ACES_to_ACEScg" Value="403">
+         </PopupEntry>
+	 	 <PopupEntry Title="ODT_Rec709_100nits_dim" Value="404">
+         </PopupEntry>
+         <PopupEntry Title="ODT_Rec709_D60sim_100nits_dim" Value="405">
+         </PopupEntry>
+         <PopupEntry Title="ODT_Rec2020_100nits_dim" Value="406">
+         </PopupEntry>
+	 	 <PopupEntry Title="ODT_Rec2020_ST2084_1000nits" Value="407">
+         </PopupEntry>
+         <PopupEntry Title="ODT_Rec2020_Rec709limited_100nits_dim" Value="408">
+         </PopupEntry>
+	 	 <PopupEntry Title="ODT_Rec2020_P3D65limited_100nits_dim" Value="409">
+         </PopupEntry>
+         <PopupEntry Title="ODT_sRGB_100nits_dim" Value="410">
+         </PopupEntry>
+         <PopupEntry Title="ODT_sRGB_D60sim_100nits_dim" Value="411">
+         </PopupEntry>
+         <PopupEntry Title="ODT_P3DCI_48nits" Value="412">
+         </PopupEntry>
+	 	 <PopupEntry Title="ODT_P3DCI_D60sim_48nits" Value="413">
+         </PopupEntry>
+         <PopupEntry Title="ODT_P3DCI_D65sim_48nits" Value="414">
+         </PopupEntry>
+	 	 <PopupEntry Title="ODT_P3D60_48nits" Value="415">
+         </PopupEntry>
+         <PopupEntry Title="ODT_P3D65_48nits" Value="416">
+         </PopupEntry>
+         <PopupEntry Title="ODT_P3D65_D60sim_48nits" Value="417">
+         </PopupEntry>
+	 	 <PopupEntry Title="ODT_P3D65_Rec709limited_48nits" Value="418">
+         </PopupEntry>
+         <PopupEntry Title="ODT_DCDM" Value="419">
+         </PopupEntry>
+	 	 <PopupEntry Title="ODT_DCDM_P3D60limited" Value="420">
+         </PopupEntry>
+         <PopupEntry Title="ODT_DCDM_P3D65limited" Value="421">
+         </PopupEntry>
+         <PopupEntry Title="ODT_RGBmonitor_100nits_dim" Value="422">
+         </PopupEntry>
+         <PopupEntry Title="ODT_RGBmonitor_D60sim_100nits_dim" Value="423">
+         </PopupEntry>
+    </Uniform>
+    <Uniform Default="500" ValueType="Popup"
+	     Tooltip="InvODT"
+	     Row="0" Col="1" Page="0" Type="int"
+	     DisplayName="InvODT" Name="p_INVODT">
+         <PopupEntry Title="Bypass" Value="500">
+         </PopupEntry>
+         <PopupEntry Title="InvODT_Rec709_100nits_dim" Value="501">
+         </PopupEntry>
+	 	 <PopupEntry Title="InvODT_Rec709_D60sim_100nits_dim" Value="502">
+         </PopupEntry>
+         <PopupEntry Title="InvODT_Rec2020_100nits_dim" Value="503">
+         </PopupEntry>
+	 	 <PopupEntry Title="InvODT_Rec2020_ST2084_1000nits" Value="504">
+         </PopupEntry>
+         <PopupEntry Title="InvODT_sRGB_100nits_dim" Value="505">
+         </PopupEntry>
+         <PopupEntry Title="InvODT_sRGB_D60sim_100nits_dim" Value="506">
+         </PopupEntry>
+	 	 <PopupEntry Title="InvODT_P3DCI_48nits" Value="507">
+         </PopupEntry>
+         <PopupEntry Title="InvODT_P3DCI_D60sim_48nits" Value="508">
+         </PopupEntry>
+	 	 <PopupEntry Title="InvODT_P3DCI_D65sim_48nits" Value="509">
+         </PopupEntry>
+         <PopupEntry Title="InvODT_P3D60_48nits" Value="510">
+         </PopupEntry>
+         <PopupEntry Title="InvODT_P3D65_48nits" Value="511">
+         </PopupEntry>
+         <PopupEntry Title="InvODT_P3D65_D60sim_48nits" Value="512">
+         </PopupEntry>
+	 	 <PopupEntry Title="InvODT_DCDM" Value="513">
+         </PopupEntry>
+         <PopupEntry Title="InvODT_DCDM_P3D65limited" Value="514">
+         </PopupEntry>
+	 	 <PopupEntry Title="InvODT_RGBmonitor_100nits_dim" Value="515">
+         </PopupEntry>
+         <PopupEntry Title="InvODT_RGBmonitor_D60sim_100nits_dim" Value="516">
+         </PopupEntry>
+    </Uniform>
+    <Uniform Default="600" ValueType="Popup"
+	     Tooltip="InvRRT"
+	     Row="1" Col="1" Page="0" Type="int"
+	     DisplayName="InvRRT" Name="p_INVRRT">
+         <PopupEntry Title="Bypass" Value="600">
+         </PopupEntry>
+         <PopupEntry Title="Enable InvRRT" Value="601">
+         </PopupEntry>
+    </Uniform>
+    <Uniform Default="700" ValueType="Popup"
+	     Tooltip="RRTODT"
+	     Row="2" Col="1" Page="0" Type="int"
+	     DisplayName="RRTODT" Name="p_RRTODT">
+         <PopupEntry Title="Bypass" Value="700">
+         </PopupEntry>
+         <PopupEntry Title="RRTODT_P3D65_108nits_7_2nits_ST2084" Value="701">
+         </PopupEntry>
+	 	 <PopupEntry Title="RRTODT_Rec2020_1000nits_15nits_HLG" Value="702">
+         </PopupEntry>
+         <PopupEntry Title="RRTODT_Rec2020_1000nits_15nits_ST2084" Value="703">
+         </PopupEntry>
+	 	 <PopupEntry Title="RRTODT_Rec2020_2000nits_15nits_ST2084" Value="704">
+         </PopupEntry>
+         <PopupEntry Title="RRTODT_Rec2020_4000nits_15nits_ST2084" Value="705">
+         </PopupEntry>
+         <PopupEntry Title="RRTODT_Rec709_100nits_10nits_BT1886" Value="706">
+         </PopupEntry>
+	 	 <PopupEntry Title="RRTODT_Rec709_100nits_10nits_sRGB" Value="707">
+         </PopupEntry>
+         <PopupEntry Title="Custom RRTODT" Value="708">
+         </PopupEntry>
+	</Uniform>
+	<Uniform Default="800" ValueType="Popup"
+	     Tooltip="InvRRTODT"
+	     Row="3" Col="1" Page="0" Type="int"
+	     DisplayName="InvRRTODT" Name="p_INVRRTODT">
+         <PopupEntry Title="Bypass" Value="800">
+         </PopupEntry>
+         <PopupEntry Title="InvRRTODT_P3D65_108nits_7_2nits_ST2084" Value="801">
+         </PopupEntry>
+	 	 <PopupEntry Title="InvRRTODT_Rec2020_1000nits_15nits_HLG" Value="802">
+         </PopupEntry>
+         <PopupEntry Title="InvRRTODT_Rec2020_1000nits_15nits_ST2084" Value="803">
+         </PopupEntry>
+	 	 <PopupEntry Title="InvRRTODT_Rec2020_2000nits_15nits_ST2084" Value="804">
+         </PopupEntry>
+         <PopupEntry Title="InvRRTODT_Rec2020_4000nits_15nits_ST2084" Value="805">
+         </PopupEntry>
+         <PopupEntry Title="InvRRTODT_Rec709_100nits_10nits_BT1886" Value="806">
+         </PopupEntry>
+	 	 <PopupEntry Title="InvRRTODT_Rec709_100nits_10nits_sRGB" Value="807">
+         </PopupEntry>
+         <PopupEntry Title="Custom InvRRTODT" Value="808">
+         </PopupEntry>
+	</Uniform>
+	<Uniform Name="p_LMTScale1" Type="float" DisplayName="Scale Colour" Page="1" Col="0" Row="0" Tooltip="" Inc="0.001" Default="1.0" Min="0.0" Max="3.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale2" Type="float" DisplayName="Slope" Page="1" Col="0" Row="1" Tooltip="" Inc="0.001" Default="1.0" Min="0.0" Max="3.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale3" Type="float" DisplayName="Offset" Page="1" Col="0" Row="2" Tooltip="" Inc="0.001" Default="0.0" Min="-3.0" Max="3.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale4" Type="float" DisplayName="Power" Page="1" Col="0" Row="3" Tooltip="" Inc="0.001" Default="1.0" Min="0.0" Max="3.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale25" Type="float" DisplayName="Saturation" Page="1" Col="0" Row="4" Tooltip="" Inc="0.001" Default="1.0" Min="0.0" Max="3.0" ResDependent="None">
+      </Uniform>
+	<Uniform Name="p_LMTScale5" Type="float" DisplayName="Contrast" Page="1" Col="1" Row="0" Tooltip="" Inc="0.001" Default="1.0" Min="0.0" Max="3.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale6" Type="float" DisplayName="Pivot Point" Page="1" Col="1" Row="1" Tooltip="" Inc="0.001" Default="0.18" Min="0.0" Max="1.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale7" Type="float" DisplayName="HvH Hue1" Page="1" Col="1" Row="2" Tooltip="" Inc="0.01" Default="30.0" Min="0.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale8" Type="float" DisplayName="HvH Range1" Page="1" Col="1" Row="3" Tooltip="" Inc="0.01" Default="60.0" Min="0.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale9" Type="float" DisplayName="HvH Rotation1" Page="1" Col="1" Row="4" Tooltip="" Inc="0.01" Default="0.0" Min="-360.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale10" Type="float" DisplayName="HvH Hue2" Page="1" Col="2" Row="0" Tooltip="" Inc="0.01" Default="210.0" Min="0.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale11" Type="float" DisplayName="HvH Range2" Page="1" Col="2" Row="1" Tooltip="" Inc="0.01" Default="60.0" Min="0.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale12" Type="float" DisplayName="HvH Rotation2" Page="1" Col="2" Row="2" Tooltip="" Inc="0.01" Default="0.0" Min="-360.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale13" Type="float" DisplayName="HvH Hue3" Page="1" Col="2" Row="3" Tooltip="" Inc="0.01" Default="120.0" Min="0.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale14" Type="float" DisplayName="HvH Range3" Page="1" Col="2" Row="4" Tooltip="" Inc="0.01" Default="60.0" Min="0.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale15" Type="float" DisplayName="HvH Rotation3" Page="1" Col="3" Row="0" Tooltip="" Inc="0.01" Default="0.0" Min="-360.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale16" Type="float" DisplayName="HvS Hue1" Page="1" Col="3" Row="1" Tooltip="" Inc="0.01" Default="30.0" Min="0.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale17" Type="float" DisplayName="HvS Range1" Page="1" Col="3" Row="2" Tooltip="" Inc="0.01" Default="60.0" Min="0.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale18" Type="float" DisplayName="HvS Sat1" Page="1" Col="3" Row="3" Tooltip="" Inc="0.01" Default="1.0" Min="0.0" Max="3.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale19" Type="float" DisplayName="HvH Hue4" Page="1" Col="3" Row="4" Tooltip="" Inc="0.01" Default="0.0" Min="0.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale20" Type="float" DisplayName="HvH Range4" Page="1" Col="4" Row="0" Tooltip="" Inc="0.01" Default="60.0" Min="0.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale21" Type="float" DisplayName="HvH Rotation4" Page="1" Col="4" Row="1" Tooltip="" Inc="0.01" Default="0.0" Min="-360.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale22" Type="float" DisplayName="HvS Hue2" Page="1" Col="4" Row="2" Tooltip="" Inc="0.01" Default="210.0" Min="0.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale23" Type="float" DisplayName="HvS Range2" Page="1" Col="4" Row="3" Tooltip="" Inc="0.01" Default="60.0" Min="0.0" Max="360.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_LMTScale24" Type="float" DisplayName="HvS Sat2" Page="1" Col="4" Row="4" Tooltip="" Inc="0.01" Default="1.0" Min="0.0" Max="3.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_OT_Y_MIN" Type="float" DisplayName="Y_Min" Page="2" Col="1" Row="0" Tooltip="" Inc="1.0" Default="1.0" Min="1.0" Max="1000.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_OT_Y_MID" Type="float" DisplayName="Y_Mid" Page="2" Col="1" Row="1" Tooltip="" Inc="0.1" Default="15.0" Min="0.0" Max="100.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_OT_Y_MAX" Type="float" DisplayName="Y_Max" Page="2" Col="1" Row="2" Tooltip="" Inc="1.0" Default="1000.0" Min="48.0" Max="10000.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_InvOT_Y_MIN" Type="float" DisplayName="Y_Min" Page="2" Col="3" Row="0" Tooltip="" Inc="1.0" Default="1.0" Min="1.0" Max="1000.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_InvOT_Y_MID" Type="float" DisplayName="Y_Mid" Page="2" Col="3" Row="1" Tooltip="" Inc="0.1" Default="15.0" Min="0.0" Max="100.0" ResDependent="None">
+      </Uniform>
+    <Uniform Name="p_InvOT_Y_MAX" Type="float" DisplayName="Y_Max" Page="2" Col="3" Row="2" Tooltip="" Inc="1.0" Default="1000.0" Min="48.0" Max="10000.0" ResDependent="None">
+      </Uniform>
+    <Uniform Default="20" ValueType="Popup"
+	     Tooltip="Chromaticities"
+	     Row="0" Col="0" Page="2" Type="int"
+	     DisplayName="Chromaticities" Name="p_OT_Display">
+         <PopupEntry Title="Rec2020" Value="20">
+         </PopupEntry>
+	 	 <PopupEntry Title="P3D60" Value="21">
+         </PopupEntry>
+         <PopupEntry Title="P3D65" Value="22">
+         </PopupEntry>
+	 	 <PopupEntry Title="P3DCI" Value="23">
+         </PopupEntry>
+         <PopupEntry Title="Rec709" Value="24">
+         </PopupEntry>
+	</Uniform>
+	<Uniform Default="30" ValueType="Popup"
+	     Tooltip="Limit Promaries"
+	     Row="1" Col="0" Page="2" Type="int"
+	     DisplayName="Limit" Name="p_OT_Limit">
+         <PopupEntry Title="Rec2020" Value="30">
+         </PopupEntry>
+	 	 <PopupEntry Title="P3D60" Value="31">
+         </PopupEntry>
+         <PopupEntry Title="P3D65" Value="32">
+         </PopupEntry>
+	 	 <PopupEntry Title="P3DCI" Value="33">
+         </PopupEntry>
+         <PopupEntry Title="Rec709" Value="34">
+         </PopupEntry>
+	</Uniform>
+	<Uniform Default="40" ValueType="Popup"
+	     Tooltip="EOTF"
+	     Row="2" Col="0" Page="2" Type="int"
+	     DisplayName="EOTF" Name="p_OT_EOTF">
+         <PopupEntry Title="ST2084" Value="40">
+         </PopupEntry>
+	 	 <PopupEntry Title="BT1886" Value="41">
+         </PopupEntry>
+         <PopupEntry Title="sRGB" Value="42">
+         </PopupEntry>
+	 	 <PopupEntry Title="Gamma 2.6" Value="43">
+         </PopupEntry>
+         <PopupEntry Title="Limear" Value="44">
+         </PopupEntry>
+         <PopupEntry Title="HLG" Value="45">
+         </PopupEntry>
+	</Uniform>
+	<Uniform Default="51" ValueType="Popup"
+	     Tooltip="Surround"
+	     Row="3" Col="0" Page="2" Type="int"
+	     DisplayName="Surround" Name="p_OT_SURR">
+         <PopupEntry Title="Dark" Value="50">
+         </PopupEntry>
+	 	 <PopupEntry Title="Dim" Value="51">
+         </PopupEntry>
+         <PopupEntry Title="Normal" Value="52">
+         </PopupEntry>
+	</Uniform>
+	<Uniform Default="60" ValueType="Popup"
+	     Tooltip="Chromaticities"
+	     Row="0" Col="2" Page="2" Type="int"
+	     DisplayName="Chromaticities" Name="p_InvOT_Display">
+         <PopupEntry Title="Rec2020" Value="60">
+         </PopupEntry>
+	 	 <PopupEntry Title="P3D60" Value="61">
+         </PopupEntry>
+         <PopupEntry Title="P3D65" Value="62">
+         </PopupEntry>
+	 	 <PopupEntry Title="P3DCI" Value="63">
+         </PopupEntry>
+         <PopupEntry Title="Rec709" Value="64">
+         </PopupEntry>
+	</Uniform>
+	<Uniform Default="70" ValueType="Popup"
+	     Tooltip="Limit Promaries"
+	     Row="1" Col="2" Page="2" Type="int"
+	     DisplayName="Limit" Name="p_InvOT_Limit">
+         <PopupEntry Title="Rec2020" Value="70">
+         </PopupEntry>
+	 	 <PopupEntry Title="P3D60" Value="71">
+         </PopupEntry>
+         <PopupEntry Title="P3D65" Value="72">
+         </PopupEntry>
+	 	 <PopupEntry Title="P3DCI" Value="73">
+         </PopupEntry>
+         <PopupEntry Title="Rec709" Value="74">
+         </PopupEntry>
+	</Uniform>
+	<Uniform Default="80" ValueType="Popup"
+	     Tooltip="EOTF"
+	     Row="2" Col="2" Page="2" Type="int"
+	     DisplayName="EOTF" Name="p_InvOT_EOTF">
+         <PopupEntry Title="ST2084" Value="80">
+         </PopupEntry>
+	 	 <PopupEntry Title="BT1886" Value="81">
+         </PopupEntry>
+         <PopupEntry Title="sRGB" Value="82">
+         </PopupEntry>
+	 	 <PopupEntry Title="Gamma 2.6" Value="83">
+         </PopupEntry>
+         <PopupEntry Title="Limear" Value="84">
+         </PopupEntry>
+         <PopupEntry Title="HLG" Value="85">
+         </PopupEntry>
+	</Uniform>
+	<Uniform Default="91" ValueType="Popup"
+	     Tooltip="Surround"
+	     Row="3" Col="2" Page="2" Type="int"
+	     DisplayName="Surround" Name="p_InvOT_SURR">
+         <PopupEntry Title="Dark" Value="90">
+         </PopupEntry>
+	 	 <PopupEntry Title="Dim" Value="91">
+         </PopupEntry>
+         <PopupEntry Title="Normal" Value="92">
+         </PopupEntry>
+	</Uniform>
+		<Uniform Row="4" Col="0" Page="2" Default="False" Tooltip="" Type="bool" DisplayName="D60 Sim" Name="p_OT_D60_SIM">
+	</Uniform>
+		<Uniform Row="3" Col="1" Page="2" Default="False" Tooltip="" Type="bool" DisplayName="Stretch Black" Name="p_OT_Stretch">
+	</Uniform>
+		<Uniform Row="4" Col="1" Page="2" Default="False" Tooltip="" Type="bool" DisplayName="Legal Range" Name="p_OT_Legal">
+	</Uniform>
+		<Uniform Row="4" Col="2" Page="2" Default="False" Tooltip="" Type="bool" DisplayName="D60 Sim" Name="p_InvOT_D60_SIM">
+	</Uniform>
+		<Uniform Row="3" Col="3" Page="2" Default="False" Tooltip="" Type="bool" DisplayName="Stretch Black" Name="p_InvOT_Stretch">
+	</Uniform>
+		<Uniform Row="4" Col="3" Page="2" Default="False" Tooltip="" Type="bool" DisplayName="Legal Range" Name="p_InvOT_Legal">
+	</Uniform>
+  </Shader>
+  <Page Name="Main" Page="0">
+      <Col Name="ACES" Col="0" Page="0">
+      </Col>
+   </Page>
+   <Page Name="LMT Custom" Page="1">
+      <Col Name="LMT Custom" Col="0" Page="1">
+      </Col>
+   </Page>
+   <Page Name="RRTODT Custom" Page="2">
+      <Col Name="Custom RRTODT" Col="0" Page="2">
+      </Col>
+      <Col Name="Custom InvRRTODT" Col="2" Page="2">
+      </Col>
+   </Page>
+</ShaderNodePreset>
