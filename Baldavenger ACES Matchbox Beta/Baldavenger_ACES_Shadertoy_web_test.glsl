@@ -1008,7 +1008,7 @@ float a = tmp.x;
 float b = tmp.y;
 float c = tmp.z;
 c = c - logy;
-float d = sqrt( b * b - 4. * a * c);
+float d = sqrt( b * b - 4.0* a * c);
 float t = ( 2.0 * c) / ( -d - b);
 logx = log10(C.minPoint.x) + ( t + float(j)) * KNOT_INC_LOW;
 } else if ( (logy > log10(C.midPoint.y)) && (logy < log10(C.maxPoint.y)) ) {
@@ -1026,8 +1026,8 @@ float a = tmp.x;
 float b = tmp.y;
 float c = tmp.z;
 c = c - logy;
-float d = sqrt( b * b - 4. * a * c);
-float t = ( 2. * c) / ( -d - b);
+float d = sqrt( b * b - 4.0* a * c);
+float t = ( 2.0* c) / ( -d - b);
 logx = log10(C.midPoint.x) + ( t + float(j)) * KNOT_INC_HIGH;
 } else {
 logx = log10(C.maxPoint.x);
@@ -1127,7 +1127,7 @@ float a = tmp.x;
 float b = tmp.y;
 float c = tmp.z;
 c = c - logy;
-float d = sqrt( b * b - 4. * a * c);
+float d = sqrt( b * b - 4.0* a * c);
 float t = ( 2.0 * c) / ( -d - b);
 logx = log10(C.minPoint.x) + ( t + float(j)) * KNOT_INC_LOW;
 } else if ( (logy > log10(C.midPoint.y)) && (logy < log10(C.maxPoint.y)) ) {
@@ -1153,7 +1153,7 @@ float a = tmp.x;
 float b = tmp.y;
 float c = tmp.z;
 c = c - logy;
-float d = sqrt( b * b - 4. * a * c);
+float d = sqrt( b * b - 4.0* a * c);
 float t = ( 2.0 * c) / ( -d - b);
 logx = log10(C.midPoint.x) + ( t + float(j)) * KNOT_INC_HIGH;
 } else {
