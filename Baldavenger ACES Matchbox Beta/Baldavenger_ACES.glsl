@@ -1,6 +1,143 @@
 // Baldavenger ACES Matchbox Shader
 
 #version 120
+//
+// Manually Override parameter selection by activating (remove '//') and entering reference e.g #define ACES_IDT IDT127
+//
+//#define ACES_IDT				IDT100
+//#define ACES_LMT				LMT200
+//#define ACES_RRT				RRT300
+//#define ACES_ODT				ODT400
+//#define ACES_INVODT			INVODT500
+//#define ACES_INVRRT			INVRRT600
+//#define ACES_RRTODT			RRTODT700
+//#define ACES_INVRRTODT		INVRRTODT800
+//
+
+#define IDT100				Bypass
+#define IDT101				ACEScc_to_ACES(aces)
+#define IDT102				ACEScct_to_ACES(aces)
+#define IDT103				ACEScg_to_ACES(aces)
+#define IDT104				ADX10_to_ACES(aces)
+#define IDT105				IDT_rec709(aces)
+#define IDT106				IDT_sRGB(aces)
+#define IDT107				IDT_Alexa_v3_logC_EI800(aces)
+#define IDT108				IDT_Alexa_v3_raw_EI800_CCT6500(aces)
+#define IDT109				IDT_Panasonic_V35(aces)
+#define IDT110				IDT_REDWideGamutRGB_Log3G10(aces)
+#define IDT111				IDT_Canon_C100_A_D55(aces)
+#define IDT112				IDT_Canon_C100_A_Tng(aces)
+#define IDT113				IDT_Canon_C100mk2_A_D55(aces)
+#define IDT114				IDT_Canon_C100mk2_A_Tng(aces)
+#define IDT115				IDT_Canon_C300_A_D55(aces)
+#define IDT116				IDT_Canon_C300_A_Tng(aces)
+#define IDT117				IDT_Canon_C500_A_D55(aces)
+#define IDT118				IDT_Canon_C500_A_Tng(aces)
+#define IDT119				IDT_Canon_C500_B_D55(aces)
+#define IDT120				IDT_Canon_C500_B_Tng(aces)
+#define IDT121				IDT_Canon_C500_CinemaGamut_A_D55(aces)
+#define IDT122				IDT_Canon_C500_CinemaGamut_A_Tng(aces)
+#define IDT123				IDT_Canon_C500_DCI_P3_A_D55(aces)
+#define IDT124				IDT_Canon_C500_DCI_P3_A_Tng(aces)
+#define IDT125				IDT_Canon_C300mk2_CanonLog_BT2020_D_D55(aces)
+#define IDT126				IDT_Canon_C300mk2_CanonLog_BT2020_D_Tng(aces)
+#define IDT127				IDT_Canon_C300mk2_CanonLog_CinemaGamut_C_D55(aces)
+#define IDT128				IDT_Canon_C300mk2_CanonLog_CinemaGamut_C_Tng(aces)
+#define IDT129				IDT_Canon_C300mk2_CanonLog2_BT2020_B_D55(aces)
+#define IDT130				IDT_Canon_C300mk2_CanonLog2_BT2020_B_Tng(aces)
+#define IDT131				IDT_Canon_C300mk2_CanonLog2_CinemaGamut_A_D55(aces)
+#define IDT132				IDT_Canon_C300mk2_CanonLog2_CinemaGamut_A_Tng(aces)
+#define IDT133				IDT_Canon_C300mk2_CanonLog3_BT2020_F_D55(aces)
+#define IDT134				IDT_Canon_C300mk2_CanonLog3_BT2020_F_Tng(aces)
+#define IDT135				IDT_Canon_C300mk2_CanonLog3_CinemaGamut_E_D55(aces)
+#define IDT136				IDT_Canon_C300mk2_CanonLog3_CinemaGamut_E_Tng(aces)
+#define IDT137				IDT_Sony_SLog1_SGamut_10(aces)
+#define IDT138				IDT_Sony_SLog1_SGamut_12(aces)
+#define IDT139				IDT_Sony_SLog2_SGamut_Daylight_10(aces)
+#define IDT140				IDT_Sony_SLog2_SGamut_Daylight_12(aces)
+#define IDT141				IDT_Sony_SLog2_SGamut_Tungsten_10(aces)
+#define IDT142				IDT_Sony_SLog2_SGamut_Tungsten_12(aces)
+#define IDT143				IDT_Sony_SLog3_SGamut3(aces)
+#define IDT144				IDT_Sony_SLog3_SGamut3Cine(aces)
+
+#define LMT200				Bypass
+#define LMT201				LMT_PFE(aces)
+#define LMT202				LMT_Bleach(aces)
+#define LMT203				LMT_BlueLightArtifactFix(aces)
+#define LMT204				LMT_PFE_Custom(aces)
+
+#define RRT300				Bypass
+#define RRT301				RRT(aces)
+
+#define ODT400				Bypass
+#define ODT401				ACES_to_ACEScc(aces)
+#define ODT402				ACES_to_ACEScct(aces)
+#define ODT403				ACES_to_ACEScg(aces)
+#define ODT404				ODT_Rec709_100nits_dim(aces)
+#define ODT405				ODT_Rec709_D60sim_100nits_dim(aces)
+#define ODT406				ODT_Rec2020_100nits_dim(aces)
+#define ODT407				ODT_Rec2020_ST2084_1000nits(aces)
+#define ODT408				ODT_Rec2020_Rec709limited_100nits_dim(aces)
+#define ODT409				ODT_Rec2020_P3D65limited_100nits_dim(aces)
+#define ODT410				ODT_sRGB_100nits_dim(aces)
+#define ODT411				ODT_sRGB_D60sim_100nits_dim(aces)
+#define ODT412				ODT_P3DCI_48nits(aces)
+#define ODT413				ODT_P3DCI_D60sim_48nits(aces)
+#define ODT414				ODT_P3DCI_D65sim_48nits(aces)
+#define ODT415				ODT_P3D60_48nits(aces)
+#define ODT416				ODT_P3D65_48nits(aces)
+#define ODT417				ODT_P3D65_D60sim_48nits(aces)
+#define ODT418				ODT_P3D65_Rec709limited_48nits(aces)
+#define ODT419				ODT_DCDM(aces)
+#define ODT420				ODT_DCDM_P3D60limited(aces)
+#define ODT421				ODT_DCDM_P3D65limited(aces)
+#define ODT422				ODT_RGBmonitor_100nits_dim(aces)
+#define ODT423				ODT_RGBmonitor_D60sim_100nits_dim(aces)
+
+#define INVODT500			Bypass
+#define INVODT501			InvODT_Rec709_100nits_dim(aces)
+#define INVODT502			InvODT_Rec709_D60sim_100nits_dim(aces)
+#define INVODT503			InvODT_Rec2020_100nits_dim(aces)
+#define INVODT504			InvODT_Rec2020_ST2084_1000nits(aces)
+#define INVODT505			InvODT_sRGB_100nits_dim(aces)
+#define INVODT506			InvODT_sRGB_D60sim_100nits_dim(aces)
+#define INVODT507			InvODT_P3DCI_48nits(aces)
+#define INVODT508			InvODT_P3DCI_D60sim_48nits(aces)
+#define INVODT509			InvODT_P3DCI_D65sim_48nits(aces)
+#define INVODT510			InvODT_P3D60_48nits(aces)
+#define INVODT511			InvODT_P3D65_48nits(aces)
+#define INVODT512			InvODT_P3D65_D60sim_48nits(aces)
+#define INVODT513			InvODT_DCDM(aces)
+#define INVODT514			InvODT_DCDM_P3D65limited(aces)
+#define INVODT515			InvODT_RGBmonitor_100nits_dim(aces)
+#define INVODT516			InvODT_RGBmonitor_D60sim_100nits_dim(aces)
+
+#define INVRRT600			Bypass
+#define INVRRT601			InvRRT(aces)
+
+#define RRTODT700			Bypass
+#define RRTODT701			RRTODT_P3D65_108nits_7_2nits_ST2084(aces)
+#define RRTODT702			RRTODT_Rec2020_1000nits_15nits_HLG(aces)
+#define RRTODT703			RRTODT_Rec2020_1000nits_15nits_ST2084(aces)
+#define RRTODT704			RRTODT_Rec2020_2000nits_15nits_ST2084(aces)
+#define RRTODT705			RRTODT_Rec2020_4000nits_15nits_ST2084(aces)
+#define RRTODT706			RRTODT_Rec709_100nits_10nits_BT1886(aces)
+#define RRTODT707			RRTODT_Rec709_100nits_10nits_sRGB(aces)
+#define RRTODT708			Custom_OutputTransform(aces, p_OT_Y_MIN, p_OT_Y_MID, p_OT_Y_MAX, p_OT_Display, p_OT_Limit, p_OT_EOTF, p_OT_SURR, p_OT_Stretch, p_OT_D60_SIM, p_OT_Legal)
+
+#define INVRRTODT800		Bypass
+#define INVRRTODT801		InvRRTODT_P3D65_108nits_7_2nits_ST2084(aces)
+#define INVRRTODT802		InvRRTODT_Rec2020_1000nits_15nits_HLG(aces)
+#define INVRRTODT803		InvRRTODT_Rec2020_1000nits_15nits_ST2084(aces)
+#define INVRRTODT804		InvRRTODT_Rec2020_2000nits_15nits_ST2084(aces)
+#define INVRRTODT805		InvRRTODT_Rec2020_4000nits_15nits_ST2084(aces)
+#define INVRRTODT806		InvRRTODT_Rec709_100nits_10nits_BT1886(aces)
+#define INVRRTODT807		InvRRTODT_Rec709_100nits_10nits_sRGB(aces)
+#define INVRRTODT808		Custom_InvOutputTransform(aces, p_InvOT_Y_MIN, p_InvOT_Y_MID, p_InvOT_Y_MAX, p_InvOT_Display, p_InvOT_Limit, p_InvOT_EOTF, p_InvOT_SURR, p_InvOT_Stretch, p_InvOT_D60_SIM, p_InvOT_Legal)
+
+#define Bypass				aces
+#define EXPOSURE			(aces * EXP)
+
 uniform sampler2D front;
 uniform float adsk_result_w, adsk_result_h;
 uniform float p_Exposure;
@@ -57,129 +194,6 @@ uniform int p_InvOT_SURR;
 uniform bool p_InvOT_Stretch;
 uniform bool p_InvOT_D60_SIM;
 uniform bool p_InvOT_Legal;
-
-#define Bypass		aces
-
-#define IDT100		Bypass
-#define IDT101		ACEScc_to_ACES(aces)
-#define IDT102		ACEScct_to_ACES(aces)
-#define IDT103		ACEScg_to_ACES(aces)
-#define IDT104		ADX10_to_ACES(aces)
-#define IDT105		IDT_rec709(aces)
-#define IDT106		IDT_sRGB(aces)
-#define IDT107		IDT_Alexa_v3_logC_EI800(aces)
-#define IDT108		IDT_Alexa_v3_raw_EI800_CCT6500(aces)
-#define IDT109		IDT_Panasonic_V35(aces)
-#define IDT110		IDT_REDWideGamutRGB_Log3G10(aces)
-#define IDT111		IDT_Canon_C100_A_D55(aces)
-#define IDT112		IDT_Canon_C100_A_Tng(aces)
-#define IDT113		IDT_Canon_C100mk2_A_D55(aces)
-#define IDT114		IDT_Canon_C100mk2_A_Tng(aces)
-#define IDT115		IDT_Canon_C300_A_D55(aces)
-#define IDT116		IDT_Canon_C300_A_Tng(aces)
-#define IDT117		IDT_Canon_C500_A_D55(aces)
-#define IDT118		IDT_Canon_C500_A_Tng(aces)
-#define IDT119		IDT_Canon_C500_B_D55(aces)
-#define IDT120		IDT_Canon_C500_B_Tng(aces)
-#define IDT121		IDT_Canon_C500_CinemaGamut_A_D55(aces)
-#define IDT122		IDT_Canon_C500_CinemaGamut_A_Tng(aces)
-#define IDT123		IDT_Canon_C500_DCI_P3_A_D55(aces)
-#define IDT124		IDT_Canon_C500_DCI_P3_A_Tng(aces)
-#define IDT125		IDT_Canon_C300mk2_CanonLog_BT2020_D_D55(aces)
-#define IDT126		IDT_Canon_C300mk2_CanonLog_BT2020_D_Tng(aces)
-#define IDT127		IDT_Canon_C300mk2_CanonLog_CinemaGamut_C_D55(aces)
-#define IDT128		IDT_Canon_C300mk2_CanonLog_CinemaGamut_C_Tng(aces)
-#define IDT129		IDT_Canon_C300mk2_CanonLog2_BT2020_B_D55(aces)
-#define IDT130		IDT_Canon_C300mk2_CanonLog2_BT2020_B_Tng(aces)
-#define IDT131		IDT_Canon_C300mk2_CanonLog2_CinemaGamut_A_D55(aces)
-#define IDT132		IDT_Canon_C300mk2_CanonLog2_CinemaGamut_A_Tng(aces)
-#define IDT133		IDT_Canon_C300mk2_CanonLog3_BT2020_F_D55(aces)
-#define IDT134		IDT_Canon_C300mk2_CanonLog3_BT2020_F_Tng(aces)
-#define IDT135		IDT_Canon_C300mk2_CanonLog3_CinemaGamut_E_D55(aces)
-#define IDT136		IDT_Canon_C300mk2_CanonLog3_CinemaGamut_E_Tng(aces)
-#define IDT137		IDT_Sony_SLog1_SGamut_10(aces)
-#define IDT138		IDT_Sony_SLog1_SGamut_12(aces)
-#define IDT139		IDT_Sony_SLog2_SGamut_Daylight_10(aces)
-#define IDT140		IDT_Sony_SLog2_SGamut_Daylight_12(aces)
-#define IDT141		IDT_Sony_SLog2_SGamut_Tungsten_10(aces)
-#define IDT142		IDT_Sony_SLog2_SGamut_Tungsten_12(aces)
-#define IDT143		IDT_Sony_SLog3_SGamut3(aces)
-#define IDT144		IDT_Sony_SLog3_SGamut3Cine(aces)
-
-#define LMT200		Bypass
-#define LMT201		LMT_PFE(aces)
-#define LMT202		LMT_Bleach(aces)
-#define LMT203		LMT_BlueLightArtifactFix(aces)
-#define LMT204		LMT_PFE_Custom(aces)
-
-#define RRT300		Bypass
-#define RRT301		RRT(aces)
-
-#define ODT400		Bypass
-#define ODT401		ACES_to_ACEScc(aces)
-#define ODT402		ACES_to_ACEScct(aces)
-#define ODT403		ACES_to_ACEScg(aces)
-#define ODT404		ODT_Rec709_100nits_dim(aces)
-#define ODT405		ODT_Rec709_D60sim_100nits_dim(aces)
-#define ODT406		ODT_Rec2020_100nits_dim(aces)
-#define ODT407		ODT_Rec2020_ST2084_1000nits(aces)
-#define ODT408		ODT_Rec2020_Rec709limited_100nits_dim(aces)
-#define ODT409		ODT_Rec2020_P3D65limited_100nits_dim(aces)
-#define ODT410		ODT_sRGB_100nits_dim(aces)
-#define ODT411		ODT_sRGB_D60sim_100nits_dim(aces)
-#define ODT412		ODT_P3DCI_48nits(aces)
-#define ODT413		ODT_P3DCI_D60sim_48nits(aces)
-#define ODT414		ODT_P3DCI_D65sim_48nits(aces)
-#define ODT415		ODT_P3D60_48nits(aces)
-#define ODT416		ODT_P3D65_48nits(aces)
-#define ODT417		ODT_P3D65_D60sim_48nits(aces)
-#define ODT418		ODT_P3D65_Rec709limited_48nits(aces)
-#define ODT419		ODT_DCDM(aces)
-#define ODT420		ODT_DCDM_P3D60limited(aces)
-#define ODT421		ODT_DCDM_P3D65limited(aces)
-#define ODT422		ODT_RGBmonitor_100nits_dim(aces)
-#define ODT423		ODT_RGBmonitor_D60sim_100nits_dim(aces)
-
-#define INVODT500		Bypass
-#define INVODT501		InvODT_Rec709_100nits_dim(aces)
-#define INVODT502		InvODT_Rec709_D60sim_100nits_dim(aces)
-#define INVODT503		InvODT_Rec2020_100nits_dim(aces)
-#define INVODT504		InvODT_Rec2020_ST2084_1000nits(aces)
-#define INVODT505		InvODT_sRGB_100nits_dim(aces)
-#define INVODT506		InvODT_sRGB_D60sim_100nits_dim(aces)
-#define INVODT507		InvODT_P3DCI_48nits(aces)
-#define INVODT508		InvODT_P3DCI_D60sim_48nits(aces)
-#define INVODT509		InvODT_P3DCI_D65sim_48nits(aces)
-#define INVODT510		InvODT_P3D60_48nits(aces)
-#define INVODT511		InvODT_P3D65_48nits(aces)
-#define INVODT512		InvODT_P3D65_D60sim_48nits(aces)
-#define INVODT513		InvODT_DCDM(aces)
-#define INVODT514		InvODT_DCDM_P3D65limited(aces)
-#define INVODT515		InvODT_RGBmonitor_100nits_dim(aces)
-#define INVODT516		InvODT_RGBmonitor_D60sim_100nits_dim(aces)
-
-#define INVRRT600		Bypass
-#define INVRRT601		InvRRT(aces)
-
-#define RRTODT700		Bypass
-#define RRTODT701		RRTODT_P3D65_108nits_7_2nits_ST2084(aces)
-#define RRTODT702		RRTODT_Rec2020_1000nits_15nits_HLG(aces)
-#define RRTODT703		RRTODT_Rec2020_1000nits_15nits_ST2084(aces)
-#define RRTODT704		RRTODT_Rec2020_2000nits_15nits_ST2084(aces)
-#define RRTODT705		RRTODT_Rec2020_4000nits_15nits_ST2084(aces)
-#define RRTODT706		RRTODT_Rec709_100nits_10nits_BT1886(aces)
-#define RRTODT707		RRTODT_Rec709_100nits_10nits_sRGB(aces)
-#define RRTODT708		Custom_OutputTransform(aces, p_OT_Y_MIN, p_OT_Y_MID, p_OT_Y_MAX, p_OT_Display, p_OT_Limit, p_OT_EOTF, p_OT_SURR, p_OT_Stretch, p_OT_D60_SIM, p_OT_Legal)
-
-#define INVRRTODT800		Bypass
-#define INVRRTODT801		InvRRTODT_P3D65_108nits_7_2nits_ST2084(aces)
-#define INVRRTODT802		InvRRTODT_Rec2020_1000nits_15nits_HLG(aces)
-#define INVRRTODT803		InvRRTODT_Rec2020_1000nits_15nits_ST2084(aces)
-#define INVRRTODT804		InvRRTODT_Rec2020_2000nits_15nits_ST2084(aces)
-#define INVRRTODT805		InvRRTODT_Rec2020_4000nits_15nits_ST2084(aces)
-#define INVRRTODT806		InvRRTODT_Rec709_100nits_10nits_BT1886(aces)
-#define INVRRTODT807		InvRRTODT_Rec709_100nits_10nits_sRGB(aces)
-#define INVRRTODT808		Custom_InvOutputTransform(aces, p_InvOT_Y_MIN, p_InvOT_Y_MID, p_InvOT_Y_MAX, p_InvOT_Display, p_InvOT_Limit, p_InvOT_EOTF, p_InvOT_SURR, p_InvOT_Stretch, p_InvOT_D60_SIM, p_InvOT_Legal)
 
 struct Chromaticities {
 vec2 red,green,blue,white;
@@ -1326,30 +1340,30 @@ return Out;
 
 vec3 ADX10_to_ACES( vec3 ADX10)
 {
-float[11] LUT_IN = float[11](
--0.19,
-0.01,
-0.028,
-0.054,
-0.095,
-0.145,
-0.22,
-0.3,
-0.4,
-0.5,
-0.6);
-float[11] LUT_OUT = float[11](
--6.0,
--2.721718645,
--2.521718645,
--2.321718645,
--2.121718645,
--1.921718645,
--1.721718645,
--1.521718645,
--1.321718645,
--1.121718645,
--0.926545676714876);
+float LUT_IN[11];
+LUT_IN[0] = -0.19;
+LUT_IN[1] = 0.01;
+LUT_IN[2] = 0.028;
+LUT_IN[3] = 0.054;
+LUT_IN[4] = 0.095;
+LUT_IN[5] = 0.145;
+LUT_IN[6] = 0.22;
+LUT_IN[7] = 0.3;
+LUT_IN[8] = 0.4;
+LUT_IN[9] = 0.5;
+LUT_IN[10] = 0.6;
+float LUT_OUT[11];
+LUT_OUT[0] = -6.0;
+LUT_OUT[1] = -2.721718645;
+LUT_OUT[2] = -2.521718645;
+LUT_OUT[3] = -2.321718645;
+LUT_OUT[4] = -2.121718645;
+LUT_OUT[5] = -1.921718645;
+LUT_OUT[6] = -1.721718645;
+LUT_OUT[7] = -1.521718645;
+LUT_OUT[8] = -1.321718645;
+LUT_OUT[9] = -1.121718645;
+LUT_OUT[10] = -0.926545676714876;
 vec3 adx;
 adx.x = ADX10.x * 1023.0;
 adx.y = ADX10.y * 1023.0;
@@ -1373,30 +1387,30 @@ return aces;
 
 vec3 ADX16_to_ACES( vec3 ADX16)
 {
-float[11] LUT_IN = float[11](
--0.19,
-0.01,
-0.028,
-0.054,
-0.095,
-0.145,
-0.22,
-0.3,
-0.4,
-0.5,
-0.6);
-float[11] LUT_OUT = float[11](
--6.0,
--2.721718645,
--2.521718645,
--2.321718645,
--2.121718645,
--1.921718645,
--1.721718645,
--1.521718645,
--1.321718645,
--1.121718645,
--0.926545676714876);
+float LUT_IN[11];
+LUT_IN[0] = -0.19;
+LUT_IN[1] = 0.01;
+LUT_IN[2] = 0.028;
+LUT_IN[3] = 0.054;
+LUT_IN[4] = 0.095;
+LUT_IN[5] = 0.145;
+LUT_IN[6] = 0.22;
+LUT_IN[7] = 0.3;
+LUT_IN[8] = 0.4;
+LUT_IN[9] = 0.5;
+LUT_IN[10] = 0.6;
+float LUT_OUT[11];
+LUT_OUT[0] = -6.0;
+LUT_OUT[1] = -2.721718645;
+LUT_OUT[2] = -2.521718645;
+LUT_OUT[3] = -2.321718645;
+LUT_OUT[4] = -2.121718645;
+LUT_OUT[5] = -1.921718645;
+LUT_OUT[6] = -1.721718645;
+LUT_OUT[7] = -1.521718645;
+LUT_OUT[8] = -1.321718645;
+LUT_OUT[9] = -1.121718645;
+LUT_OUT[10] = -0.926545676714876;
 vec3 adx;
 adx.x = ADX16.x * 65535.0;
 adx.y = ADX16.y * 65535.0;
@@ -4700,88 +4714,198 @@ return cv;
 
 vec3 get_IDT( int idt, vec3 aces) {
 if(idt == 100) return aces;
-if(idt <= 110){
-aces = idt == 101 ? IDT101 : idt == 102 ? IDT102 : idt == 103 ? IDT103 : idt == 104 ? IDT104 : idt == 105 ? IDT105 : 
-idt == 106 ? IDT106 : idt == 107 ? IDT107 : idt == 108 ? IDT108 : idt == 109 ? IDT109 : IDT110; return aces; }
-if(idt <= 120){
-aces = idt == 111 ? IDT111 : idt == 112 ? IDT112 : idt == 113 ? IDT113 : idt == 114 ? IDT114 : idt == 115 ? IDT115 : 
-idt == 116 ? IDT116 : idt == 117 ? IDT117 : idt == 118 ? IDT118 : idt == 119 ? IDT119 : IDT120; return aces; }
-if(idt <= 130){
-aces = idt == 121 ? IDT121 : idt == 122 ? IDT122 : idt == 123 ? IDT123 : idt == 124 ? IDT124 : idt == 125 ? IDT125 : 
-idt == 126 ? IDT126 : idt == 127 ? IDT127 : idt == 128 ? IDT128 : idt == 129 ? IDT129 : IDT130; return aces; }
-if(idt <= 140){
-aces = idt == 131 ? IDT131 : idt == 132 ? IDT132 : idt == 133 ? IDT133 : idt == 134 ? IDT134 : idt == 135 ? IDT135 : 
-idt == 136 ? IDT136 : idt == 137 ? IDT137 : idt == 138 ? IDT138 : idt == 139 ? IDT139 : IDT140; return aces; }
-if(idt <= 150){
-aces = idt == 141 ? IDT141 : idt == 142 ? IDT142 : idt == 143 ? IDT143 : IDT144; return aces; }
-return aces;
+if(idt == 101) return IDT101;
+if(idt == 102) return IDT102;
+if(idt == 103) return IDT103;
+if(idt == 104) return IDT104;
+if(idt == 105) return IDT105;
+if(idt == 106) return IDT106;
+if(idt == 107) return IDT107;
+if(idt == 108) return IDT108;
+if(idt == 109) return IDT109;
+if(idt == 110) return IDT110;
+if(idt == 111) return IDT111;
+if(idt == 112) return IDT112;
+if(idt == 113) return IDT113;
+if(idt == 114) return IDT114;
+if(idt == 115) return IDT115;
+if(idt == 116) return IDT116;
+if(idt == 117) return IDT117;
+if(idt == 118) return IDT118;
+if(idt == 119) return IDT119;
+if(idt == 120) return IDT120;
+if(idt == 121) return IDT121;
+if(idt == 122) return IDT122;
+if(idt == 123) return IDT123;
+if(idt == 124) return IDT124;
+if(idt == 125) return IDT125;
+if(idt == 126) return IDT126;
+if(idt == 127) return IDT127;
+if(idt == 128) return IDT128;
+if(idt == 129) return IDT129;
+if(idt == 130) return IDT130;
+if(idt == 131) return IDT131;
+if(idt == 132) return IDT132;
+if(idt == 133) return IDT133;
+if(idt == 134) return IDT134;
+if(idt == 135) return IDT135;
+if(idt == 136) return IDT136;
+if(idt == 137) return IDT137;
+if(idt == 138) return IDT138;
+if(idt == 139) return IDT139;
+if(idt == 140) return IDT140;
+if(idt == 141) return IDT141;
+if(idt == 142) return IDT142;
+if(idt == 143) return IDT143;
+if(idt == 144) return IDT144;
+else return aces;
 }
 
 vec3 get_LMT( int lmt, vec3 aces) {
 if(lmt == 200) return aces;
-if(lmt <= 210)
-aces = lmt == 201 ? LMT201 : lmt == 202 ? LMT202 : lmt == 203 ? LMT203 : LMT204;
-return aces;
+if(lmt == 201) return LMT201;
+if(lmt == 202) return LMT202;
+if(lmt == 203) return LMT203;
+if(lmt == 204) return LMT204;
+else return aces;
 }
 
 vec3 get_ODT( int odt, vec3 aces) {
 if(odt == 400) return aces;
-if(odt <= 410){
-aces = odt == 401 ? ODT401 : odt == 402 ? ODT402 : odt == 403 ? ODT403 : odt == 404 ? ODT404 : odt == 405 ? ODT405 : 
-odt == 406 ? ODT406 : odt == 407 ? ODT407 : odt == 408 ? ODT408 : odt == 409 ? ODT409 : ODT410; return aces; }
-if(odt <= 420){
-aces = odt == 411 ? ODT411 : odt == 442 ? ODT412 : odt == 413 ? ODT413 : odt == 414 ? ODT414 : odt == 415 ? ODT415 : 
-odt == 416 ? ODT416 : odt == 417 ? ODT417 : odt == 418 ? ODT418 : odt == 419 ? ODT419 : ODT420; return aces; }
-if(odt <= 430){
-aces = odt == 421 ? ODT421 : odt == 422 ? ODT422 : odt == 423 ? ODT423 : aces; return aces; }
-return aces;
+if(odt == 401) return ODT401;
+if(odt == 402) return ODT402;
+if(odt == 403) return ODT403;
+if(odt == 404) return ODT404;
+if(odt == 405) return ODT405;
+if(odt == 406) return ODT406;
+if(odt == 407) return ODT407;
+if(odt == 408) return ODT408;
+if(odt == 409) return ODT409;
+if(odt == 410) return ODT410;
+if(odt == 411) return ODT411;
+if(odt == 412) return ODT412;
+if(odt == 413) return ODT413;
+if(odt == 414) return ODT414;
+if(odt == 415) return ODT415;
+if(odt == 416) return ODT416;
+if(odt == 417) return ODT417;
+if(odt == 418) return ODT418;
+if(odt == 419) return ODT419;
+if(odt == 420) return ODT420;
+if(odt == 421) return ODT421;
+if(odt == 422) return ODT422;
+if(odt == 423) return ODT423;
+else return aces;
 }
 
-vec3 get_InvODT( int invodt, vec3 aces) {
+vec3 get_INVODT( int invodt, vec3 aces) {
 if(invodt == 500) return aces;
-if(invodt <= 510){
-aces = invodt == 501 ? INVODT501 : invodt == 502 ? INVODT502 : invodt == 503 ? INVODT503 : invodt == 504 ? INVODT504 : invodt == 505 ? INVODT505 : 
-invodt == 506 ? INVODT506 : invodt == 507 ? INVODT507 : invodt == 508 ? INVODT508 : invodt == 509 ? INVODT509 : INVODT510; return aces; }
-if(invodt <= 520){
-aces = invodt == 511 ? INVODT511 : invodt == 542 ? INVODT512 : invodt == 513 ? INVODT513 : invodt == 514 ? INVODT514 : 
-invodt == 515 ? INVODT515 : INVODT516; return aces; }
-return aces;
+if(invodt == 501) return INVODT501;
+if(invodt == 502) return INVODT502;
+if(invodt == 503) return INVODT503;
+if(invodt == 504) return INVODT504;
+if(invodt == 505) return INVODT505;
+if(invodt == 506) return INVODT506;
+if(invodt == 507) return INVODT507;
+if(invodt == 508) return INVODT508;
+if(invodt == 509) return INVODT509;
+if(invodt == 510) return INVODT510;
+if(invodt == 511) return INVODT511;
+if(invodt == 512) return INVODT512;
+if(invodt == 513) return INVODT513;
+if(invodt == 514) return INVODT514;
+if(invodt == 515) return INVODT515;
+if(invodt == 516) return INVODT516;
+else return aces;
 }
 
 vec3 get_RRTODT( int rrtodt, vec3 aces) {
 if(rrtodt == 700) return aces;
-if(rrtodt <= 710){
-aces = rrtodt == 701 ? RRTODT701 : rrtodt == 702 ? RRTODT702 : rrtodt == 703 ? RRTODT703 : rrtodt == 704 ? RRTODT704 : rrtodt == 705 ? RRTODT705 : 
-rrtodt == 706 ? RRTODT706 : rrtodt == 707 ? RRTODT707 : RRTODT708; return aces; }
-return aces;
+if(rrtodt == 701) return RRTODT701;
+if(rrtodt == 702) return RRTODT702;
+if(rrtodt == 703) return RRTODT703;
+if(rrtodt == 704) return RRTODT704;
+if(rrtodt == 705) return RRTODT705;
+if(rrtodt == 706) return RRTODT706;
+if(rrtodt == 707) return RRTODT707;
+if(rrtodt == 708) return RRTODT708;
+else return aces;
 }
 
-vec3 get_InvRRTODT( int invrrtodt, vec3 aces) {
+vec3 get_INVRRTODT( int invrrtodt, vec3 aces) {
 if(invrrtodt == 800) return aces;
-if(invrrtodt <= 810){
-aces = invrrtodt == 801 ? INVRRTODT801 : invrrtodt == 802 ? INVRRTODT802 : invrrtodt == 803 ? INVRRTODT803 : invrrtodt == 804 ? INVRRTODT804 : invrrtodt == 805 ? INVRRTODT805 : 
-invrrtodt == 806 ? INVRRTODT806 : invrrtodt == 807 ? INVRRTODT807 : INVRRTODT808; return aces; }
-return aces;
+if(invrrtodt == 801) return INVRRTODT801;
+if(invrrtodt == 802) return INVRRTODT802;
+if(invrrtodt == 803) return INVRRTODT803;
+if(invrrtodt == 804) return INVRRTODT804;
+if(invrrtodt == 805) return INVRRTODT805;
+if(invrrtodt == 806) return INVRRTODT806;
+if(invrrtodt == 807) return INVRRTODT807;
+if(invrrtodt == 808) return INVRRTODT808;
+else return aces;
 }
+
+vec3 get_INVRRT( int invrrt, vec3 aces) {
+if(invrrt == 600) return aces;
+else return INVRRT601;
+}
+
+vec3 get_RRT( int rrt, vec3 aces) {
+if(rrt == 300) return aces;
+else return RRT301;
+}
+
+#define ACES_PIPELINE	\
+aces = ACES_IDT;		\
+aces = EXPOSURE;		\
+aces = ACES_LMT;		\
+aces = ACES_RRT;		\
+aces = ACES_ODT;		\
+aces = ACES_INVODT;		\
+aces = ACES_INVRRT;		\
+aces = ACES_RRTODT;		\
+aces = ACES_INVRRTODT;
 
 void main()
 {
 vec2 uv = gl_FragCoord.xy / vec2( adsk_result_w, adsk_result_h );
 vec3 aces = texture2D(front, uv).rgb;
 
-aces = get_IDT(p_IDT, aces);
+float EXP = (p_Exposure != 0.0) ? exp2(p_Exposure) : 1.0;
 
-aces = get_InvODT(p_INVODT, aces);
-if(p_INVRRT == 601) aces = INVRRT601;
-aces = get_InvRRTODT(p_INVRRTODT, aces);
+#ifndef ACES_IDT
+#define ACES_IDT 		get_IDT(p_IDT, aces)
+#endif
 
-if(p_Exposure != 0.0) aces *= exp2(p_Exposure);
+#ifndef ACES_INVODT
+#define ACES_INVODT		get_INVODT(p_INVODT, aces)
+#endif
 
-aces = get_LMT(p_LMT, aces);
+#ifndef ACES_INVRRT
+#define ACES_INVRRT 	get_INVRRT(p_INVRRT, aces)
+#endif
 
-if(p_RRT == 301) aces = RRT301;
-aces = get_ODT(p_ODT, aces);
-aces = get_RRTODT(p_RRTODT, aces);
+#ifndef ACES_INVRRTODT
+#define ACES_INVRRTODT	get_INVRRTODT(p_INVRRTODT, aces)
+#endif
+
+#ifndef ACES_LMT
+#define ACES_LMT		get_LMT(p_LMT, aces)
+#endif
+
+#ifndef ACES_RRT
+#define ACES_RRT		get_RRT(p_RRT, aces)
+#endif
+
+#ifndef ACES_ODT
+#define ACES_ODT		get_ODT(p_ODT, aces)
+#endif
+
+#ifndef ACES_RRTODT
+#define ACES_RRTODT		get_RRTODT(p_RRTODT, aces)
+#endif
+
+ACES_PIPELINE
 
 gl_FragColor = vec4(aces, 1.0);
 }
